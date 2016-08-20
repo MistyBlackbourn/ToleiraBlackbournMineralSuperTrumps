@@ -9,23 +9,14 @@ public class Player {
 
     }
 
-    public static void main(String[] args) {
-        Player player1 = new Player("Toleira");
-        System.out.println(player1.getName());
-        System.out.println("Initial hand size " + player1.getHandSize());
-        player1.setHandSize(true);
-        System.out.println("Got a card " + player1.getHandSize());
-        player1.setHandSize(false);
-        System.out.println("Played a card " + player1.getHandSize());
-        Player player2 = new Player("Royce");
-        System.out.println(player2.getName());
-        System.out.println(player2.getHandSize());
+    //setters
 
-
+    public void setPlayersHand(Card[] newPlayersHand) {
+        this.playersHand = newPlayersHand;
     }
 
-    public String getName() {
-        return this.playerName;
+    public void setPlayerName(String newPlayerName) {
+        this.playerName = newPlayerName;
     }
 
     public void setHandSize(Boolean control) {
@@ -34,6 +25,16 @@ public class Player {
         } else {
             --handSize;
         }
+    }
+
+    //getters
+
+    public Card[] getPlayersHand() {
+        return playersHand;
+    }
+
+    public String getName() {
+        return this.playerName;
     }
 
     public int getHandSize() {

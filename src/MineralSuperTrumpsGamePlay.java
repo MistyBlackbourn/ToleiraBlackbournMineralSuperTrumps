@@ -13,7 +13,7 @@ public class MineralSuperTrumpsGamePlay {
                 System.out.print("Please enter the number of players: ");
                 numberPlayers = userInput.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Not a number");
+                System.out.println("Please enter a valid number.");
 
             }
         } while (numberPlayers < 3 || numberPlayers > 5);
