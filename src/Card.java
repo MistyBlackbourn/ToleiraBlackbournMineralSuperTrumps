@@ -12,12 +12,16 @@ public class Card {
     String crustalAbundance;
     String economicValue;
 
-    Card(String subtitle) {
+    Card(String cardType, String title, String subtitle) {
+        this.cardType = cardType;
+        this.title = title;
         this.subtitle = subtitle;
     }
 
-    Card(String chemistry, String classification, String crystalSystem, String[] occurrence,
+    Card(String cardType, String title, String chemistry, String classification, String crystalSystem, String[] occurrence,
          double hardness, double specificGravity, String cleavage, String crustalAbundance, String economicValue) {
+        this.cardType = cardType;
+        this.title = title;
         this.chemistry = chemistry;
         this.classification = classification;
         this.crystalSystem = crystalSystem;
