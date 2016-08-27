@@ -23,10 +23,11 @@ public class Main {
         for (int i = 0; i < numberPlayers; ++i) {
             System.out.print("Please enter the name of player" + (i + 1) + ": ");
             playerName = userInput.next();
-            Player player = new Player(playerName);
-            System.out.println(player.getName());
+            game.createPlayers(playerName);
+
         }
         game.createCards();
         game.shuffleDeck();
+        game.dealCards();
     }
 }

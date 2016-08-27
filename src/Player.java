@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 
 public class Player {
     String playerName;
     int handSize = 8;
-    Card[] playersHand = new Card[60]; //must test this when Card class is created
+    ArrayList<Card> playersHand = new ArrayList<>(); //must test this when Card class is created
 
     Player(String newName) {
         playerName = newName;
@@ -11,7 +12,7 @@ public class Player {
 
     //setters
 
-    public void setPlayersHand(Card[] newPlayersHand) {
+    public void setPlayersHand(ArrayList<Card> newPlayersHand) {
         this.playersHand = newPlayersHand;
     }
 
@@ -29,7 +30,7 @@ public class Player {
 
     //getters
 
-    public Card[] getPlayersHand() {
+    public ArrayList<Card> getPlayersHand() {
         return playersHand;
     }
 
