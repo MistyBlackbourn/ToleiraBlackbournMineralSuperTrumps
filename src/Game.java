@@ -48,13 +48,45 @@ public class Game {
     }
 
     public void dealCards() {
-        for ( int j = 0; j < players.size(); ++j) {
+        for (int j = 0; j < players.size(); ++j) {
             for (int i = 0; i < 8; ++i) {
                 players.get(j).playersHand.add(cardDeck.deck.get(i));
-                System.out.println("Player " + j + " " + players.get(j).playersHand.get(i).cardType);
+                //System.out.println("Player " + j + " " + players.get(j).playersHand.get(i).cardType);
             }
 
         }
+    }
+
+    public StringBuilder getPlayerCards(ArrayList<Card> playersHand) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int cardNumber = 0;
+        for (Card card : playersHand) {
+            stringBuilder.append(cardNumber + 1);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.cardType);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.title);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.chemistry);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.classification);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.crustalAbundance);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.cleavage);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.crystalSystem);
+            stringBuilder.append(" | ");
+            stringBuilder.append(card.economicValue);
+            stringBuilder.append("\n");
+            ++cardNumber;
+        }
+        stringBuilder.append(0);
+        stringBuilder.append(" | ");
+        stringBuilder.append("PASS");
+
+        return stringBuilder;
+
     }
 
 }
