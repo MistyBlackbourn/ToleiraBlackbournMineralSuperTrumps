@@ -5,7 +5,7 @@ public class Card {
     String chemistry;
     String classification;
     String crystalSystem;
-    String[] occurrence = new String[3];
+    String occurrence;
     double hardness;
     double specificGravity;
     String cleavage;
@@ -18,7 +18,7 @@ public class Card {
         this.subtitle = subtitle;
     }
 
-    Card(String cardType, String title, String chemistry, String classification, String crystalSystem, String[] occurrence,
+    Card(String title, String cardType, String chemistry, String classification, String crystalSystem, String occurrence,
          double hardness, double specificGravity, String cleavage, String crustalAbundance, String economicValue) {
         this.cardType = cardType;
         this.title = title;
@@ -79,7 +79,7 @@ public class Card {
         this.economicValue = newEconomicValue;
     }
 
-    public void setOccurrence(String[] newOccurrence) {
+    public void setOccurrence(String newOccurrence) {
         this.occurrence = newOccurrence;
     }
 
@@ -129,7 +129,7 @@ public class Card {
         return this.economicValue;
     }
 
-    public String[] setOccurrence() {
+    public String setOccurrence() {
         return this.occurrence;
     }
 }

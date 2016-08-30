@@ -8,6 +8,8 @@ public class Main {
         int numberPlayers = 0;
         boolean winner = false;
         int cardChoice = 0;
+        boolean validCard;
+        boolean categorySelected = false;
 
         do {
             try {
@@ -33,17 +35,35 @@ public class Main {
         game.dealCards();
         int i = 0;
         while (!winner) {
-            System.out.println(game.players.get(i));
+            System.out.println(game.players.get(i).playerName);
 
             System.out.println(game.getPlayerCards(game.players.get(i).playersHand));
-            do {
-                try {
-                    System.out.println("Please enter the number for the corresponding card");
-                    cardChoice = userInput.nextInt();
-                } catch (InputMismatchException e) {
-                    System.out.println("Please enter a valid number");
+            validCard = false;
+            while(!validCard) {
+                do {
+                    try {
+                        System.out.println("Please enter the number for the corresponding card");
+                        cardChoice = userInput.nextInt();
+                        if (!categorySelected){
+                            System.out.println("Please select the category");
+                            game.cardCategory = userInput.next().toLowerCase();
+                            System.out.println(game.cardCategory);
+                            categorySelected = true;
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Please enter a valid number");
+                    }
+                } while (cardChoice > game.players.get(i).playersHand.size() || cardChoice < 0);
+                if (cardChoice == 0){
+                    //pass - player must take a card
+                    System.out.println("Chose to pass, draw a card");
                 }
-            } while(cardChoice > game.players.get(i).playersHand.size() || cardChoice < 0);
+                else {
+                    validCard = game.checkCard(game.players.get(i).playersHand.get(cardChoice - 1));
+                }
+            }
+            game.playDeck.addCard(game.players.get(i).playersHand.get(cardChoice - 1));
+            System.out.println(game.playDeck.deck.get(i).title);
             System.out.println("Worked!");
             ++i;
             if (i >= numberPlayers) {
