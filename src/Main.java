@@ -43,9 +43,11 @@ public class Main {
                 do {
                     try {
                         System.out.println("Please enter the number for the corresponding card");
-                        cardChoice = userInput.nextInt();
+                        Scanner cardInput = new Scanner(System.in);
+                        cardChoice = cardInput.nextInt();
                         if (!categorySelected){
-                            System.out.println("Please select the category");
+                            System.out.println("Please select the category \n Hardness \n Specific Gravity \n Cleavage \n" +
+                                    " Crustal Abundance \n Economic Value");
                             game.cardCategory = userInput.next().toLowerCase();
                             System.out.println(game.cardCategory);
                             categorySelected = true;
@@ -57,13 +59,16 @@ public class Main {
                 if (cardChoice == 0){
                     //pass - player must take a card
                     System.out.println("Chose to pass, draw a card");
+                    validCard = true;
                 }
                 else {
                     validCard = game.checkCard(game.players.get(i).playersHand.get(cardChoice - 1));
+                    game.playDeck.addCard(game.players.get(i).playersHand.get(cardChoice - 1));
+                    if (!validCard){
+                        System.out.println("You can't play that card, please select another");
+                    }
                 }
             }
-            game.playDeck.addCard(game.players.get(i).playersHand.get(cardChoice - 1));
-            System.out.println(game.playDeck.deck.get(i).title);
             System.out.println("Worked!");
             ++i;
             if (i >= numberPlayers) {

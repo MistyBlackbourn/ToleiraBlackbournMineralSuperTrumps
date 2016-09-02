@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Game {
     Deck cardDeck = new Deck();
@@ -49,10 +50,22 @@ public class Game {
     }
 
     public void dealCards() {
-        for (int j = 0; j < players.size(); ++j) {
-            for (int i = 0; i < 8; ++i) {
+        int dealer;
+        Random random = new Random();
+        dealer = random.nextInt(players.size());
+        System.out.println("Dealer is" + dealer);
+
+        for (int i = 0; i < 8; ++i) {
+            int cardsDealt = 0;
+            //System.out.println("New round " + i);
+            for (int j = dealer + 1; cardsDealt < players.size(); ++j) {
+                if (j >= players.size() && cardsDealt < players.size()){
+                    j = 0;
+                }
                 players.get(j).playersHand.add(cardDeck.deck.get(i));
-                //System.out.println("Player " + j + " " + players.get(j).playersHand.get(i).cardType);
+
+                //System.out.println("Player " + j + " " + players.get(j).playersHand.get(i).title);
+                ++cardsDealt;
             }
 
         }
@@ -96,32 +109,31 @@ public class Game {
 
     }
 
-    public boolean checkCard(Card selectedCard){
+    public boolean checkCard(Card selectedCard) {
         boolean validCard = false;
         Card lastCardPlayed;
-        if (playDeck.deckSize == 0){
+        if (playDeck.deckSize == 0) {
             return true;
-        }
-        else {
-            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize()-1);
+        } else {
+            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
         }
 
         //each switch case must compare the cardCategory of selectedCard with the lastCardPlayed
 
-        switch(cardCategory){
+        switch (cardCategory) {
             case "hardness":
                 validCard = true;
                 break;
-            case "Specific Gravity":
+            case "specific gravity":
+                validCard = false;
+                break;
+            case "cleavage":
                 validCard = true;
                 break;
-            case "Cleavage":
+            case "crustal abundance":
                 validCard = true;
                 break;
-            case "Crustal Abundance":
-                validCard = true;
-                break;
-            case "Economic Value":
+            case "economic value":
                 validCard = true;
                 break;
         }
