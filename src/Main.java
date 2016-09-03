@@ -53,11 +53,12 @@ public class Main {
                 game.createCards();
                 game.shuffleDeck();
                 game.dealCards();
-                int i = 0;
+                //int i = 0;
                 while (!winner) {
-                    System.out.println(game.players.get(i).playerName);
+                    game.validPlayer();
+                    System.out.println(game.players.get(game.playersTurn).playerName);
 
-                    System.out.println(game.getPlayerCards(game.players.get(i).playersHand));
+                    System.out.println(game.getPlayerCards(game.players.get(game.playersTurn).playersHand));
                     validCard = false;
                     while (!validCard) {
                         do {
@@ -75,24 +76,24 @@ public class Main {
                             } catch (InputMismatchException e) {
                                 System.out.println("Please enter a valid number");
                             }
-                        } while (cardChoice > game.players.get(i).playersHand.size() || cardChoice < 0);
+                        } while (cardChoice > game.players.get(game.playersTurn).playersHand.size() || cardChoice < 0);
                         if (cardChoice == 0) {
                             //pass - player must take a card
                             System.out.println("Chose to pass, draw a card");
                             validCard = true;
                         } else {
-                            validCard = game.checkCard(game.players.get(i).playersHand.get(cardChoice - 1));
-                            game.playDeck.addCard(game.players.get(i).playersHand.get(cardChoice - 1));
+                            validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
+                            game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
                             }
                         }
                     }
                     System.out.println("Worked!");
-                    ++i;
-                    if (i >= numberPlayers) {
-                        winner = true; //This makes the loop not infinite during testing
-                        i = 0;
+                    game.nextPlayer();
+                    if (game.playersTurn >= numberPlayers) {
+                        //winner = true; //This makes the loop not infinite during testing
+
                     }
                 }
             } else if (menuSelection == 2) {

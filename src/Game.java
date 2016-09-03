@@ -7,6 +7,7 @@ public class Game {
     Deck playDeck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
     String cardCategory;
+    int playersTurn = 0;
 
     public void createPlayers(String playerName) {
         Player player = new Player(playerName);
@@ -49,26 +50,46 @@ public class Game {
         Collections.shuffle(cardDeck.deck);
     }
 
+    // randomly selects a dealer and sets the which player goes first
     public void dealCards() {
         int dealer;
         Random random = new Random();
         dealer = random.nextInt(players.size());
-        //System.out.println("Dealer is" + dealer);
+        System.out.println("Dealer is" + dealer);
 
         for (int i = 0; i < 8; ++i) {
             int cardsDealt = 0;
-            //System.out.println("New round " + i);
-            for (int j = dealer + 1; cardsDealt < players.size(); ++j) {
-                if (j >= players.size() && cardsDealt < players.size()){
-                    j = 0;
+            System.out.println("New round " + i);
+            for (playersTurn = dealer + 1; cardsDealt < players.size(); ++playersTurn) {
+                if (playersTurn >= players.size() && cardsDealt < players.size()) {
+                    playersTurn = 0;
                 }
-                players.get(j).playersHand.add(cardDeck.deck.get(i));
+                players.get(playersTurn).playersHand.add(cardDeck.deck.get(i));
 
-                //System.out.println("Player " + j + " " + players.get(j).playersHand.get(i).title);
+                System.out.println("Player " + playersTurn + " " + players.get(playersTurn).playersHand.get(i).title);
                 ++cardsDealt;
             }
 
         }
+    }
+
+    public void validPlayer() {
+        if (playersTurn >= players.size()) {
+            playersTurn = 0;
+        }
+    }
+
+    public void nextPlayer() {
+        if (playersTurn >= players.size()) {
+            playersTurn = 0;
+        } else {
+            ++playersTurn;
+        }
+
+    }
+
+    public void drawCard() {
+        cardDeck.takeCard();
     }
 
     public StringBuilder getPlayerCards(ArrayList<Card> playersHand) {
