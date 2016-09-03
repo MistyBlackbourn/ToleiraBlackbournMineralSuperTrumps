@@ -20,30 +20,15 @@ public class Game {
         Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", 7, 2.65, "poor/none", "high", "moderate");
         Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "very high", "moderate");
         Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "very high", "moderate");
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
+        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
+        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
+        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
+        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);        cardDeck.addCard(card3);
     }
 
     public void shuffleDeck() {
@@ -55,18 +40,20 @@ public class Game {
         int dealer;
         Random random = new Random();
         dealer = random.nextInt(players.size());
-        System.out.println("Dealer is" + dealer);
+        //System.out.println("Dealer is" + dealer);
 
         for (int i = 0; i < 8; ++i) {
             int cardsDealt = 0;
-            System.out.println("New round " + i);
+            //System.out.println("New round " + i);
             for (playersTurn = dealer + 1; cardsDealt < players.size(); ++playersTurn) {
                 if (playersTurn >= players.size() && cardsDealt < players.size()) {
                     playersTurn = 0;
                 }
                 players.get(playersTurn).playersHand.add(cardDeck.deck.get(i));
-
-                System.out.println("Player " + playersTurn + " " + players.get(playersTurn).playersHand.get(i).title);
+                //System.out.println("Before deck size " + cardDeck.deckSize);
+                cardDeck.takeCard();
+                //System.out.println("After deck size " + cardDeck.deckSize);
+                //System.out.println("Player " + playersTurn + " " + players.get(playersTurn).playersHand.get(i).title);
                 ++cardsDealt;
             }
 
@@ -89,6 +76,8 @@ public class Game {
     }
 
     public void drawCard() {
+        players.get(playersTurn).playersHand.add(cardDeck.deck.get(cardDeck.deckSize-1));
+        players.get(playersTurn).setHandSize(true);
         cardDeck.takeCard();
     }
 
@@ -160,6 +149,12 @@ public class Game {
         }
 
         return validCard;
+    }
+
+    public void playCard(Card selectedCard, int cardChoice){
+        cardDeck.addCard(selectedCard);
+        players.get(playersTurn).playersHand.remove(cardChoice);
+        //System.out.println(cardDeck.deck.get(cardDeck.getDeckSize()-1).title);
     }
 
 }

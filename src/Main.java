@@ -78,8 +78,8 @@ public class Main {
                             }
                         } while (cardChoice > game.players.get(game.playersTurn).playersHand.size() || cardChoice < 0);
                         if (cardChoice == 0) {
-                            //pass - player must take a card
                             System.out.println("Chose to pass, draw a card");
+                            game.drawCard();
                             validCard = true;
                         } else {
                             validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
@@ -87,9 +87,13 @@ public class Main {
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
                             }
+                            else{
+                                game.playCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), cardChoice - 1);
+                            }
                         }
                     }
                     System.out.println("Worked!");
+
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
                         //winner = true; //This makes the loop not infinite during testing
