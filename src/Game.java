@@ -53,7 +53,7 @@ public class Game {
         int dealer;
         Random random = new Random();
         dealer = random.nextInt(players.size());
-        System.out.println("Dealer is" + dealer);
+        //System.out.println("Dealer is" + dealer);
 
         for (int i = 0; i < 8; ++i) {
             int cardsDealt = 0;
@@ -115,7 +115,7 @@ public class Game {
         if (playDeck.deckSize == 0) {
             return true;
         } else {
-            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
+            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1); // will be used for comparisons
         }
 
         //each switch case must compare the cardCategory of selectedCard with the lastCardPlayed

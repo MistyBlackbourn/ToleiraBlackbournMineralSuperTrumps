@@ -4,7 +4,6 @@ public class Deck {
     ArrayList<Card> deck = new ArrayList<>();
     int deckSize = 0;
 
-    //potentially need to change this so deck is random
     public void addCard(Card newCard){
         deck.add(newCard);
         ++deckSize;
