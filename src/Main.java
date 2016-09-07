@@ -2,15 +2,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    static Game game = new Game();
+
     public static void main(String[] args) {
-        Game game = new Game();
-        String playerName;
-        int numberPlayers = 0;
         boolean winner = false;
         int cardChoice = 0;
         boolean validCard;
         boolean categorySelected = false;
-
+        int numberPlayers;
         int menuSelection = 0;
 
 
@@ -31,25 +30,9 @@ public class Main {
 
 
             if (menuSelection == 1) {
-                do {
-                    try {
-                        Scanner userInput = new Scanner(System.in);
-                        System.out.println("There must be at least 3 players and at most 5 players.");
-                        System.out.print("Please enter the number of players: ");
-                        numberPlayers = userInput.nextInt();
-                    } catch (InputMismatchException e) {
-                        System.out.println("Please enter a valid number.");
+                numberPlayers = getPlayers();
 
-                    }
-                } while (numberPlayers < 3 || numberPlayers > 5);
-
-                Scanner userInput = new Scanner(System.in);
-                for (int i = 0; i < numberPlayers; ++i) {
-                    System.out.print("Please enter the name of player" + (i + 1) + ": ");
-                    playerName = userInput.next();
-                    game.createPlayers(playerName);
-
-                }
+                getPlayersNames(numberPlayers);
                 game.createCards();
                 game.shuffleDeck();
                 game.dealCards();
@@ -67,10 +50,7 @@ public class Main {
                                 Scanner cardInput = new Scanner(System.in);
                                 cardChoice = cardInput.nextInt();
                                 if (!categorySelected) {
-                                    System.out.println("Please select the category \n Hardness \n Specific Gravity \n Cleavage \n" +
-                                            " Crustal Abundance \n Economic Value");
-                                    game.cardCategory = userInput.next().toLowerCase();
-                                    System.out.println(game.cardCategory);
+                                    getCategory();
                                     categorySelected = true;
                                 }
                             } catch (InputMismatchException e) {
@@ -86,8 +66,7 @@ public class Main {
                             game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
-                            }
-                            else{
+                            } else {
                                 game.playCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), cardChoice - 1);
                             }
                         }
@@ -96,15 +75,63 @@ public class Main {
 
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
-                        //winner = true; //This makes the loop not infinite during testing
+                        winner = true; //This makes the loop not infinite during testing
 
                     }
                 }
             } else if (menuSelection == 2) {
-                System.out.println("THE RULES ARE...");
+                displayRules();
+
             }
         } while (menuSelection != 3);
         System.out.println("Thanks for playing!");
     }
+
+    public static int getPlayers() {
+        Scanner userInput = new Scanner(System.in);
+        int numberPlayers = 0;
+        do {
+            try {
+
+                System.out.println("There must be at least 3 players and at most 5 players.");
+                System.out.print("Please enter the number of players: ");
+                numberPlayers = userInput.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number.");
+
+            }
+        } while (numberPlayers < 3 || numberPlayers > 5);
+        return numberPlayers;
+    }
+
+    public static void getPlayersNames(int numberPlayers) {
+        String playerName;
+        Scanner userInput = new Scanner(System.in);
+
+        for (int i = 0; i < numberPlayers; ++i) {
+            System.out.print("Please enter the name of player" + (i + 1) + ": ");
+            playerName = userInput.next();
+            game.createPlayers(playerName);
+
+        }
+
+    }
+
+    public static void getCategory() {
+        //Add error checking
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Please select the category \n Hardness \n Specific Gravity \n Cleavage \n" +
+                " Crustal Abundance \n Economic Value");
+        game.cardCategory = userInput.nextLine();
+        game.cardCategory = game.cardCategory.toLowerCase();
+        System.out.println(game.cardCategory);
+    }
+
+    public static void displayRules(){
+        //use string builder in Game to get rules
+        //return the String here to display
+        System.out.println("THE RULES ARE...");
+    }
+
 }
 

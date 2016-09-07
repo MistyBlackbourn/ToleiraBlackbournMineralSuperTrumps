@@ -17,18 +17,55 @@ public class Game {
     //For testing Card and Deck class.
     //This needs to be changed to read xml file.
     public void createCards() {
-        Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", 7, 2.65, "poor/none", "high", "moderate");
-        Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "very high", "moderate");
-        Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "very high", "moderate");
-        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
-        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
-        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
-        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card1);        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);        cardDeck.addCard(card1);        cardDeck.addCard(card2);        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);        cardDeck.addCard(card3);
+        Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", 7, 2.65, "poor/none", "ultratrace", "moderate");
+        Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "trace", "moderate");
+        Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "low", "moderate");
+        Card card4 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", 7, 2.65, "poor/none", "moderate", "moderate");
+        Card card5 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "high", "moderate");
+        Card card6 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", 6 - 6.5, 2.6 - 2.8, "1 perfect. 1 good", "very high", "moderate");
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+        cardDeck.addCard(card1);
+        cardDeck.addCard(card2);
+        cardDeck.addCard(card3);
+        cardDeck.addCard(card4);
+        cardDeck.addCard(card5);
+        cardDeck.addCard(card6);
+
     }
 
     public void shuffleDeck() {
@@ -76,7 +113,7 @@ public class Game {
     }
 
     public void drawCard() {
-        players.get(playersTurn).playersHand.add(cardDeck.deck.get(cardDeck.deckSize-1));
+        players.get(playersTurn).playersHand.add(cardDeck.deck.get(cardDeck.deckSize - 1));
         players.get(playersTurn).setHandSize(true);
         cardDeck.takeCard();
     }
@@ -141,7 +178,21 @@ public class Game {
                 validCard = true;
                 break;
             case "crustal abundance":
-                validCard = true;
+                if (lastCardPlayed.crustalAbundance.equals(selectedCard.crustalAbundance)) {
+                    validCard = false;
+                } else if (lastCardPlayed.crustalAbundance.equals("ultratrace")) {
+                    validCard = true;
+                } else if (lastCardPlayed.crustalAbundance.equals("trace") && !selectedCard.crustalAbundance.equals("ultratrace")) {
+                    validCard = true;
+                } else if (lastCardPlayed.crustalAbundance.equals("low") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace"))) {
+                    validCard = true;
+                } else if (lastCardPlayed.crustalAbundance.equals("moderate") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace") || !selectedCard.crustalAbundance.equals("low"))) {
+                    validCard = true;
+                } else if (lastCardPlayed.crustalAbundance.equals("high") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace") || !selectedCard.crustalAbundance.equals("low") || !selectedCard.crustalAbundance.equals("moderate"))) {
+                    validCard = true;
+                } else if(lastCardPlayed.crustalAbundance.equals("very high")){
+                    validCard = false;
+                }
                 break;
             case "economic value":
                 validCard = true;
@@ -151,7 +202,7 @@ public class Game {
         return validCard;
     }
 
-    public void playCard(Card selectedCard, int cardChoice){
+    public void playCard(Card selectedCard, int cardChoice) {
         cardDeck.addCard(selectedCard);
         players.get(playersTurn).playersHand.remove(cardChoice);
         //System.out.println(cardDeck.deck.get(cardDeck.getDeckSize()-1).title);
