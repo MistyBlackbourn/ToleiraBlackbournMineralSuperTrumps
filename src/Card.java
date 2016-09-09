@@ -6,8 +6,8 @@ public class Card {
     String classification;
     String crystalSystem;
     String occurrence;
-    double hardness;
-    double specificGravity;
+    String hardness;
+    String specificGravity;
     String cleavage;
     String crustalAbundance;
     String economicValue;
@@ -19,7 +19,7 @@ public class Card {
     }
 
     Card(String title, String cardType, String chemistry, String classification, String crystalSystem, String occurrence,
-         double hardness, double specificGravity, String cleavage, String crustalAbundance, String economicValue) {
+         String hardness, String specificGravity, String cleavage, String crustalAbundance, String economicValue) {
         this.cardType = cardType;
         this.title = title;
         this.chemistry = chemistry;
@@ -59,11 +59,11 @@ public class Card {
         this.crystalSystem = newCrystalSystem;
     }
 
-    public void setHardness(double newHrdness) {
+    public void setHardness(String newHrdness) {
         this.hardness = newHrdness;
     }
 
-    public void setSpecificGravity(double newSpecificGravity) {
+    public void setSpecificGravity(String newSpecificGravity) {
         this.specificGravity = newSpecificGravity;
     }
 
@@ -109,11 +109,11 @@ public class Card {
         return this.crystalSystem;
     }
 
-    public double setHardness() {
+    public String setHardness() {
         return this.hardness;
     }
 
-    public double setSpecificGravity() {
+    public String setSpecificGravity() {
         return this.specificGravity;
     }
 
