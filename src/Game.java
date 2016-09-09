@@ -182,16 +182,18 @@ public class Game {
                     validCard = false;
                 } else if (lastCardPlayed.crustalAbundance.equals("ultratrace")) {
                     validCard = true;
-                } else if (lastCardPlayed.crustalAbundance.equals("trace") && !selectedCard.crustalAbundance.equals("ultratrace")) {
-                    validCard = true;
-                } else if (lastCardPlayed.crustalAbundance.equals("low") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace"))) {
-                    validCard = true;
-                } else if (lastCardPlayed.crustalAbundance.equals("moderate") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace") || !selectedCard.crustalAbundance.equals("low"))) {
-                    validCard = true;
-                } else if (lastCardPlayed.crustalAbundance.equals("high") && (!selectedCard.crustalAbundance.equals("ultratrace") || !selectedCard.crustalAbundance.equals("trace") || !selectedCard.crustalAbundance.equals("low") || !selectedCard.crustalAbundance.equals("moderate"))) {
-                    validCard = true;
+                } else if (lastCardPlayed.crustalAbundance.equals("trace") && selectedCard.crustalAbundance.equals("ultratrace")) {
+                    validCard = false;
+                } else if (lastCardPlayed.crustalAbundance.equals("low") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace"))) {
+                    validCard = false;
+                } else if (lastCardPlayed.crustalAbundance.equals("moderate") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace") || selectedCard.crustalAbundance.equals("low"))) {
+                    validCard = false;
+                } else if (lastCardPlayed.crustalAbundance.equals("high") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace") || selectedCard.crustalAbundance.equals("low") || selectedCard.crustalAbundance.equals("moderate"))) {
+                    validCard = false;
                 } else if(lastCardPlayed.crustalAbundance.equals("very high")){
                     validCard = false;
+                } else {
+                    validCard = true;
                 }
                 break;
             case "economic value":
@@ -203,7 +205,7 @@ public class Game {
     }
 
     public void playCard(Card selectedCard, int cardChoice) {
-        cardDeck.addCard(selectedCard);
+        playDeck.addCard(selectedCard);
         players.get(playersTurn).playersHand.remove(cardChoice);
         //System.out.println(cardDeck.deck.get(cardDeck.getDeckSize()-1).title);
     }

@@ -63,7 +63,7 @@ public class Main {
                             validCard = true;
                         } else {
                             validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
-                            game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
+                            //game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
                             } else {
@@ -75,7 +75,7 @@ public class Main {
 
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
-                        winner = true; //This makes the loop not infinite during testing
+                        //winner = true; //This makes the loop not infinite during testing
 
                     }
                 }
