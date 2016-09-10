@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -18,12 +17,12 @@ public class Game {
     //For testing Card and Deck class.
     //This needs to be changed to read xml file.
     public void createCards() {
-        Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "ultratrace", "moderate");
-        Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect. 1 good", "trace", "moderate");
-        Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect. 1 good", "low", "moderate");
+        Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "none", "ultratrace", "moderate");
+        Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 1 good", "trace", "moderate");
+        Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "2 perfect", "low", "moderate");
         Card card4 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "moderate", "moderate");
-        Card card5 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect. 1 good", "high", "moderate");
-        Card card6 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect. 1 good", "very high", "moderate");
+        Card card5 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 2 good", "high", "moderate");
+        Card card6 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "4 perfect", "very high", "moderate");
         cardDeck.addCard(card1);
         cardDeck.addCard(card2);
         cardDeck.addCard(card3);
@@ -184,11 +183,117 @@ public class Game {
 
 
             case "specific gravity":
-                validCard = false;
-                break;
+                String[] lastSpecificGravity;
+                String[] selectedSpecificGravity;
+                double lastSpecificGravityNumber;
+                double selectedSpecificGravityNumber;
+                lastSpecificGravity = lastCardPlayed.specificGravity.split("-");
+                selectedSpecificGravity = selectedCard.specificGravity.split("-");
+                lastSpecificGravityNumber = Double.parseDouble(lastSpecificGravity[lastSpecificGravity.length - 1]);
+                selectedSpecificGravityNumber = Double.parseDouble(selectedSpecificGravity[selectedSpecificGravity.length - 1]);
+                System.out.println(lastSpecificGravityNumber);
+                System.out.println(selectedSpecificGravityNumber);
+                return lastSpecificGravityNumber < selectedSpecificGravityNumber;
+
             case "cleavage":
-                validCard = true;
-                break;
+                int lastCleavage = 0;
+                int selectedCleavage = 0;
+
+                switch (lastCardPlayed.cleavage) {
+                    case "none":
+                        lastCleavage = 1;
+                        break;
+                    case "poor/none":
+                        lastCleavage = 2;
+                        break;
+                    case "1 poor":
+                        lastCleavage = 3;
+                        break;
+                    case "2 poor":
+                        lastCleavage = 4;
+                        break;
+                    case "1 good":
+                        lastCleavage = 5;
+                        break;
+                    case "1 good, 1 poor":
+                        lastCleavage = 6;
+                        break;
+                    case "2 good":
+                        lastCleavage = 7;
+                        break;
+                    case "3 good":
+                        lastCleavage = 8;
+                        break;
+                    case "1 perfect":
+                        lastCleavage = 9;
+                        break;
+                    case "1 perfect, 1 good":
+                        lastCleavage = 10;
+                        break;
+                    case "1 perfect, 2 good":
+                        lastCleavage = 11;
+                        break;
+                    case "2 perfect, 1 good":
+                        lastCleavage = 12;
+                        break;
+                    case "3 perfect":
+                        lastCleavage = 13;
+                        break;
+                    case "4 perfect":
+                        lastCleavage = 14;
+                        break;
+                    case "6 perfect":
+                        lastCleavage = 15;
+                }
+
+                switch (selectedCard.cleavage) {
+                    case "none":
+                        selectedCleavage = 1;
+                        break;
+                    case "poor/none":
+                        selectedCleavage = 2;
+                        break;
+                    case "1 poor":
+                        selectedCleavage = 3;
+                        break;
+                    case "2 poor":
+                        selectedCleavage = 4;
+                        break;
+                    case "1 good":
+                        selectedCleavage = 5;
+                        break;
+                    case "1 good, 1 poor":
+                        selectedCleavage = 6;
+                        break;
+                    case "2 good":
+                        selectedCleavage = 7;
+                        break;
+                    case "3 good":
+                        selectedCleavage = 8;
+                        break;
+                    case "1 perfect":
+                        selectedCleavage = 9;
+                        break;
+                    case "1 perfect, 1 good":
+                        selectedCleavage = 10;
+                        break;
+                    case "1 perfect, 2 good":
+                        selectedCleavage = 11;
+                        break;
+                    case "2 perfect, 1 good":
+                        selectedCleavage = 12;
+                        break;
+                    case "3 perfect":
+                        selectedCleavage = 13;
+                        break;
+                    case "4 perfect":
+                        selectedCleavage = 14;
+                        break;
+                    case "6 perfect":
+                        selectedCleavage = 15;
+                }
+                return selectedCleavage > lastCleavage;
+
             case "crustal abundance":
                 if (lastCardPlayed.crustalAbundance.equals(selectedCard.crustalAbundance)) {
                     return false;
