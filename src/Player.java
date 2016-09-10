@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Player {
     String playerName;
+    boolean passed = false;
     int handSize = 8;
     ArrayList<Card> playersHand = new ArrayList<>(); //must test this when Card class is created
 
@@ -20,12 +21,16 @@ public class Player {
         this.playerName = newPlayerName;
     }
 
-    public void setHandSize(Boolean control) {
+    public void setHandSize(boolean control) {
         if (control) {
             ++handSize;
         } else {
             --handSize;
         }
+    }
+
+    public void setPassed(boolean passed){
+        this.passed = passed;
     }
 
     //getters
@@ -40,5 +45,9 @@ public class Player {
 
     public int getHandSize() {
         return this.handSize;
+    }
+
+    public boolean getPassed(){
+        return this.passed;
     }
 }

@@ -9,8 +9,10 @@ public class Main {
         int cardChoice = 0;
         boolean validCard;
         boolean categorySelected = false;
+        boolean newCategorySelected = false;
         int numberPlayers;
         int menuSelection = 0;
+        int playersPassed = 0;
 
 
         System.out.println("Welcome to Mineral Super Trumps");
@@ -47,11 +49,16 @@ public class Main {
                         do {
                             try {
                                 System.out.println("Please enter the number for the corresponding card");
+                                if (!categorySelected){
+                                    System.out.println("If you select a card, you will also need to select a category");
+                                }
                                 Scanner cardInput = new Scanner(System.in);
                                 cardChoice = cardInput.nextInt();
-                                if (!categorySelected) {
+                                newCategorySelected = false;
+                                if (!categorySelected && !game.players.get(game.playersTurn).passed) {
                                     getCategory();
                                     categorySelected = true;
+                                    newCategorySelected = true;
                                 }
                             } catch (InputMismatchException e) {
                                 System.out.println("Please enter a valid number");
@@ -61,8 +68,12 @@ public class Main {
                             System.out.println("Chose to pass, draw a card");
                             game.drawCard();
                             validCard = true;
+                            ++playersPassed;
+                            if (playersPassed >= numberPlayers-1) {
+                                categorySelected = false;
+                            }
                         } else {
-                            validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
+                            validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), newCategorySelected);
                             //game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
@@ -75,7 +86,7 @@ public class Main {
 
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
-                        //winner = true; //This makes the loop not infinite during testing
+                        winner = true; //This makes the loop not infinite during testing
 
                     }
                 }
@@ -127,7 +138,7 @@ public class Main {
         System.out.println(game.cardCategory);
     }
 
-    public static void displayRules(){
+    public static void displayRules() {
         //use string builder in Game to get rules
         //return the String here to display
         System.out.println("THE RULES ARE...");

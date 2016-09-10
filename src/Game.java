@@ -115,6 +115,7 @@ public class Game {
     public void drawCard() {
         players.get(playersTurn).playersHand.add(cardDeck.deck.get(cardDeck.deckSize - 1));
         players.get(playersTurn).setHandSize(true);
+        players.get(playersTurn).setPassed(true);
         cardDeck.takeCard();
     }
 
@@ -135,16 +136,22 @@ public class Game {
             stringBuilder.append(card.crystalSystem);
             stringBuilder.append(" | ");
             stringBuilder.append(card.occurrence);
-            stringBuilder.append(" | ");
+            stringBuilder.append("\n");
+            stringBuilder.append("Hardness: ");
             stringBuilder.append(card.hardness);
-            stringBuilder.append(" | ");
+            stringBuilder.append("\n");
+            stringBuilder.append("Specific Gravity: ");
             stringBuilder.append(card.specificGravity);
-            stringBuilder.append(" | ");
+            stringBuilder.append("\n");
+            stringBuilder.append("Cleavage: ");
             stringBuilder.append(card.cleavage);
-            stringBuilder.append(" | ");
+            stringBuilder.append("\n");
+            stringBuilder.append("Crustal Abundance: ");
             stringBuilder.append(card.crustalAbundance);
-            stringBuilder.append(" | ");
+            stringBuilder.append("\n");
+            stringBuilder.append("Economic Value: ");
             stringBuilder.append(card.economicValue);
+            stringBuilder.append("\n");
             stringBuilder.append("\n");
             ++cardNumber;
         }
@@ -156,10 +163,10 @@ public class Game {
 
     }
 
-    public boolean checkCard(Card selectedCard) {
+    public boolean checkCard(Card selectedCard, boolean newCategorySelected) {
         boolean validCard = false;
         Card lastCardPlayed;
-        if (playDeck.deckSize == 0) {
+        if (playDeck.deckSize == 0 || newCategorySelected) {
             return true;
         } else {
             lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1); // will be used for comparisons
@@ -191,8 +198,8 @@ public class Game {
                 selectedSpecificGravity = selectedCard.specificGravity.split("-");
                 lastSpecificGravityNumber = Double.parseDouble(lastSpecificGravity[lastSpecificGravity.length - 1]);
                 selectedSpecificGravityNumber = Double.parseDouble(selectedSpecificGravity[selectedSpecificGravity.length - 1]);
-                System.out.println(lastSpecificGravityNumber);
-                System.out.println(selectedSpecificGravityNumber);
+                //System.out.println(lastSpecificGravityNumber);
+                //System.out.println(selectedSpecificGravityNumber);
                 return lastSpecificGravityNumber < selectedSpecificGravityNumber;
 
             case "cleavage":
@@ -311,16 +318,28 @@ public class Game {
                 return lastCardPlayed.crustalAbundance.equals("very high");
 
             case "economic value":
-                validCard = true;
-                break;
+                if (lastCardPlayed.economicValue.equals(selectedCard.economicValue)) {
+                    return false;
+                } else if (lastCardPlayed.economicValue.equals("trivial")) {
+                    return true;
+                } else if (lastCardPlayed.economicValue.equals("low") && selectedCard.economicValue.equals("trivial")) {
+                    return false;
+                } else if (lastCardPlayed.economicValue.equals("moderate") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low"))) {
+                    return false;
+                } else if (lastCardPlayed.economicValue.equals("high") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low") || selectedCard.economicValue.equals("moderate"))) {
+                    return false;
+                } else if (lastCardPlayed.economicValue.equals("very high") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low") || selectedCard.economicValue.equals("moderate") || selectedCard.economicValue.equals("high"))) {
+                    return false;
+                }
+                return lastCardPlayed.economicValue.equals("I'm rich!");
         }
-
         return validCard;
     }
 
     public void playCard(Card selectedCard, int cardChoice) {
         playDeck.addCard(selectedCard);
         players.get(playersTurn).playersHand.remove(cardChoice);
+        players.get(playersTurn).setPassed(false);
         //System.out.println(cardDeck.deck.get(cardDeck.getDeckSize()-1).title);
     }
 
