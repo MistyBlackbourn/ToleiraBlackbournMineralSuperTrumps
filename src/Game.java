@@ -163,6 +163,42 @@ public class Game {
 
     }
 
+    public StringBuilder playerSelection(){
+        String value = "";
+        Card lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
+
+        switch(cardCategory){
+            case "hardness":
+                String[] lastHardness;
+                lastHardness = lastCardPlayed.hardness.split("-");
+                value = lastHardness[lastHardness.length - 1];
+                break;
+            case "specific gravity":
+                String[] lastSpecificGravity;
+                lastSpecificGravity = lastCardPlayed.hardness.split("-");
+                value = lastSpecificGravity[lastSpecificGravity.length - 1];
+                break;
+            case "cleavage":
+                value = lastCardPlayed.cleavage;
+                break;
+            case "crustal abundance":
+                value = lastCardPlayed.crustalAbundance;
+                break;
+            case "economic value":
+                value = lastCardPlayed.economicValue;
+                break;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(lastCardPlayed.title);
+        stringBuilder.append(", ");
+        stringBuilder.append(cardCategory);
+        stringBuilder.append(", ");
+        stringBuilder.append(value);
+
+        return stringBuilder;
+    }
+
     public boolean checkCard(Card selectedCard, boolean newCategorySelected) {
         boolean validCard = false;
         Card lastCardPlayed;

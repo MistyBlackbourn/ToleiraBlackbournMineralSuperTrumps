@@ -79,10 +79,11 @@ public class Main {
                                 System.out.println("You can't play that card, please select another");
                             } else {
                                 game.playCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), cardChoice - 1);
+                                System.out.println(game.playerSelection());
                             }
                         }
                     }
-                    System.out.println("Worked!");
+                    //System.out.println("Worked!");
 
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
@@ -135,7 +136,7 @@ public class Main {
                 " Crustal Abundance \n Economic Value");
         game.cardCategory = userInput.nextLine();
         game.cardCategory = game.cardCategory.toLowerCase();
-        System.out.println(game.cardCategory);
+        //System.out.println(game.cardCategory);
     }
 
     public static void displayRules() {
