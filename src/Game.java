@@ -119,6 +119,14 @@ public class Game {
         cardDeck.takeCard();
     }
 
+    public void resetPlayersPassed(){
+        for (Player player: players) {
+            player.setPassed(false);
+            System.out.println(player.passed);
+
+        }
+    }
+
     public StringBuilder getPlayerCards(ArrayList<Card> playersHand) {
         StringBuilder stringBuilder = new StringBuilder();
         int cardNumber = 0;

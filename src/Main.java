@@ -49,7 +49,7 @@ public class Main {
                         do {
                             try {
                                 System.out.println("Please enter the number for the corresponding card");
-                                if (!categorySelected){
+                                if (!categorySelected) {
                                     System.out.println("If you select a card, you will also need to select a category");
                                 }
                                 Scanner cardInput = new Scanner(System.in);
@@ -59,6 +59,8 @@ public class Main {
                                     getCategory();
                                     categorySelected = true;
                                     newCategorySelected = true;
+                                    game.resetPlayersPassed();
+                                    playersPassed = 0;
                                 }
                             } catch (InputMismatchException e) {
                                 System.out.println("Please enter a valid number");
@@ -69,7 +71,7 @@ public class Main {
                             game.drawCard();
                             validCard = true;
                             ++playersPassed;
-                            if (playersPassed >= numberPlayers-1) {
+                            if (playersPassed >= numberPlayers - 1) {
                                 categorySelected = false;
                             }
                         } else {
@@ -87,7 +89,7 @@ public class Main {
 
                     game.nextPlayer();
                     if (game.playersTurn >= numberPlayers) {
-                        winner = true; //This makes the loop not infinite during testing
+                        //winner = true; //This makes the loop not infinite during testing
 
                     }
                 }
@@ -131,12 +133,30 @@ public class Main {
 
     public static void getCategory() {
         //Add error checking
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Please select the category \n Hardness \n Specific Gravity \n Cleavage \n" +
-                " Crustal Abundance \n Economic Value");
-        game.cardCategory = userInput.nextLine();
-        game.cardCategory = game.cardCategory.toLowerCase();
-        //System.out.println(game.cardCategory);
+        int selection = 0;
+
+        do {
+            try {
+                Scanner userInput = new Scanner(System.in);
+                System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
+                        " 4 - Crustal Abundance \n 5 - Economic Value");
+                selection = userInput.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Selection is invalid");
+            }
+        } while (selection < 1 || selection > 5);
+        if (selection == 1) {
+            game.cardCategory = "hardness";
+        } else if (selection == 2) {
+            game.cardCategory = "specific gravity";
+        } else if (selection == 3) {
+            game.cardCategory = "cleavage";
+        } else if (selection == 4) {
+            game.cardCategory = "crustal abundance";
+        } else if (selection == 5) {
+            game.cardCategory = "economic value";
+        }
+        System.out.println(game.cardCategory);
     }
 
     public static void displayRules() {
