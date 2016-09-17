@@ -6,6 +6,7 @@ public class Game {
     Deck cardDeck = new Deck();
     Deck playDeck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
+    ArrayList<Player> winningPlayers = new ArrayList<>();
     String cardCategory;
     boolean categoryIsSelected = false;
     boolean newCategorySelected = false;
@@ -346,7 +347,13 @@ public class Game {
     public void playCard(Card selectedCard, int cardChoice) {
         playDeck.addCard(selectedCard);
         players.get(playersTurn).getPlayersHand().remove(cardChoice);
+        players.get(playersTurn).setHandSize(false);
         players.get(playersTurn).setPassed(false);
+    }
+
+    public void winningPlayer(){
+        winningPlayers.add(players.get(playersTurn));
+        players.remove(players.get(playersTurn));
     }
 
 }

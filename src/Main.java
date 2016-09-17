@@ -5,7 +5,6 @@ public class Main {
     static Game game = new Game();
 
     public static void main(String[] args) {
-        boolean winner = false;
         int cardChoice;
         boolean validCard;
         int numberPlayers;
@@ -27,7 +26,7 @@ public class Main {
                 game.shuffleDeck();
                 game.dealCards();
                 //int i = 0;
-                while (!winner) {
+                while (game.players.size() > 1) {
                     game.validPlayer();
                     System.out.println(game.players.get(game.playersTurn).getName());
 
@@ -44,7 +43,6 @@ public class Main {
                             }
                         } else {
                             validCard = game.checkCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1));
-                            //game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
                             } else {
@@ -54,12 +52,11 @@ public class Main {
                             }
                         }
                     }
+                    if (game.players.get(game.playersTurn).getHandSize() == 0) {
+                        game.winningPlayer();
 
+                    }
                     game.nextPlayer();
-//                    if (game.playersTurn >= numberPlayers) {
-//                        winner = true; //This makes the loop not infinite during testing
-//
-//                    }
                 }
             } else if (menuSelection == 2) {
                 displayRules();
@@ -69,7 +66,7 @@ public class Main {
         System.out.println("Thanks for playing!");
     }
 
-    public static int getCardSelection(){
+    public static int getCardSelection() {
         int choice = 0;
         do {
             try {
@@ -84,14 +81,14 @@ public class Main {
                 System.out.println("Please enter a valid number");
             }
         } while (choice > game.players.get(game.playersTurn).getHandSize() || choice < 0);
-        if (!game.categoryIsSelected && !game.players.get(game.playersTurn).getPassed()) {
+        if (!game.categoryIsSelected && choice != 0) {
             getCategory();
 
         }
         return choice;
     }
 
-    public static int getMenuSelection(){
+    public static int getMenuSelection() {
         int input = 0;
         do {
             try {
