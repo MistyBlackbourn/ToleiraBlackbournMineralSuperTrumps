@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Player {
-    String playerName;
-    boolean passed = false;
-    int handSize = 8;
-    ArrayList<Card> playersHand = new ArrayList<>(); //must test this when Card class is created
+    private String playerName;
+    private boolean passed = false;
+    private int handSize = 8;
+    private ArrayList<Card> playersHand = new ArrayList<>(); //must test this when Card class is created
 
     Player(String newName) {
         playerName = newName;
@@ -36,7 +36,7 @@ public class Player {
     //getters
 
     public ArrayList<Card> getPlayersHand() {
-        return playersHand;
+        return this.playersHand;
     }
 
     public String getName() {

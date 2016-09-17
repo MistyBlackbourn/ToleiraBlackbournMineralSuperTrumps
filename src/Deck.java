@@ -9,8 +9,6 @@ public class Deck {
         ++deckSize;
     }
 
-    //doesn't delete from deck so as not to lose reference to card
-    //also must add the taken card to the hand of the player
     public void takeCard(){
         deck.remove(deckSize-1);
         --deckSize;

@@ -6,13 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         boolean winner = false;
-        int cardChoice = 0;
+        int cardChoice;
         boolean validCard;
-        boolean categorySelected = false;
-        boolean newCategorySelected = false;
         int numberPlayers;
-        int menuSelection = 0;
-        int playersPassed = 0;
+        int menuSelection;
 
 
         System.out.println("Welcome to Mineral Super Trumps");
@@ -20,16 +17,7 @@ public class Main {
             System.out.println("Please make a selection. \n(1) Play Game \n" +
                     "(2) See rules \n" +
                     "(3) Quit");
-            do {
-                try {
-                    Scanner userInput = new Scanner(System.in);
-                    menuSelection = userInput.nextInt();
-                } catch (InputMismatchException e) {
-                    System.out.println("Please make a valid selection");
-                }
-
-            } while (menuSelection < 1 || menuSelection > 3);
-
+            menuSelection = getMenuSelection();
 
             if (menuSelection == 1) {
                 numberPlayers = getPlayers();
@@ -41,57 +29,37 @@ public class Main {
                 //int i = 0;
                 while (!winner) {
                     game.validPlayer();
-                    System.out.println(game.players.get(game.playersTurn).playerName);
+                    System.out.println(game.players.get(game.playersTurn).getName());
 
-                    System.out.println(game.getPlayerCards(game.players.get(game.playersTurn).playersHand));
+                    System.out.println(game.getPlayerCards(game.players.get(game.playersTurn).getPlayersHand()));
                     validCard = false;
                     while (!validCard) {
-                        do {
-                            try {
-                                System.out.println("Please enter the number for the corresponding card");
-                                if (!categorySelected) {
-                                    System.out.println("If you select a card, you will also need to select a category");
-                                }
-                                Scanner cardInput = new Scanner(System.in);
-                                cardChoice = cardInput.nextInt();
-                                newCategorySelected = false;
-                                if (!categorySelected && !game.players.get(game.playersTurn).passed) {
-                                    getCategory();
-                                    categorySelected = true;
-                                    newCategorySelected = true;
-                                    game.resetPlayersPassed();
-                                    playersPassed = 0;
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("Please enter a valid number");
-                            }
-                        } while (cardChoice > game.players.get(game.playersTurn).playersHand.size() || cardChoice < 0);
+                        cardChoice = getCardSelection();
                         if (cardChoice == 0) {
                             System.out.println("Chose to pass, draw a card");
                             game.drawCard();
                             validCard = true;
-                            ++playersPassed;
-                            if (playersPassed >= numberPlayers - 1) {
-                                categorySelected = false;
+                            if (game.playersPassed()) {
+                                game.categoryIsSelected = false;
                             }
                         } else {
-                            validCard = game.checkCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), newCategorySelected);
+                            validCard = game.checkCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1));
                             //game.playDeck.addCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1));
                             if (!validCard) {
                                 System.out.println("You can't play that card, please select another");
                             } else {
-                                game.playCard(game.players.get(game.playersTurn).playersHand.get(cardChoice - 1), cardChoice - 1);
+                                game.playCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1), cardChoice - 1);
+                                game.newCategorySelected = false;
                                 System.out.println(game.playerSelection());
                             }
                         }
                     }
-                    //System.out.println("Worked!");
 
                     game.nextPlayer();
-                    if (game.playersTurn >= numberPlayers) {
-                        //winner = true; //This makes the loop not infinite during testing
-
-                    }
+//                    if (game.playersTurn >= numberPlayers) {
+//                        winner = true; //This makes the loop not infinite during testing
+//
+//                    }
                 }
             } else if (menuSelection == 2) {
                 displayRules();
@@ -99,6 +67,42 @@ public class Main {
             }
         } while (menuSelection != 3);
         System.out.println("Thanks for playing!");
+    }
+
+    public static int getCardSelection(){
+        int choice = 0;
+        do {
+            try {
+                System.out.println("Please enter the number for the corresponding card");
+                if (!game.categoryIsSelected) {
+                    System.out.println("You may select any card and next you will need to select a new category");
+                }
+                Scanner cardInput = new Scanner(System.in);
+                choice = cardInput.nextInt();
+
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number");
+            }
+        } while (choice > game.players.get(game.playersTurn).getHandSize() || choice < 0);
+        if (!game.categoryIsSelected && !game.players.get(game.playersTurn).getPassed()) {
+            getCategory();
+
+        }
+        return choice;
+    }
+
+    public static int getMenuSelection(){
+        int input = 0;
+        do {
+            try {
+                Scanner userInput = new Scanner(System.in);
+                input = userInput.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please make a valid selection");
+            }
+
+        } while (input < 1 || input > 3);
+        return input;
     }
 
     public static int getPlayers() {
@@ -156,6 +160,9 @@ public class Main {
         } else if (selection == 5) {
             game.cardCategory = "economic value";
         }
+        game.categoryIsSelected = true;
+        game.newCategorySelected = true;
+        game.resetPlayersPassed();
         System.out.println(game.cardCategory);
     }
 

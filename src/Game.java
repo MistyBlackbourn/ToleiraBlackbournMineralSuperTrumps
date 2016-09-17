@@ -7,6 +7,8 @@ public class Game {
     Deck playDeck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
     String cardCategory;
+    boolean categoryIsSelected = false;
+    boolean newCategorySelected = false;
     int playersTurn = 0;
 
     public void createPlayers(String playerName) {
@@ -68,11 +70,22 @@ public class Game {
 
     }
 
+    public boolean playersPassed() {
+        int count = 0;
+        for (Player player : players) {
+            if (player.getPassed()) {
+                ++count;
+            }
+        }
+        return count >= (players.size() - 1);
+
+    }
+
     public void shuffleDeck() {
         Collections.shuffle(cardDeck.deck);
     }
 
-    // randomly selects a dealer and sets the which player goes first
+    // randomly selects a dealer and sets the player that goes first
     public void dealCards() {
         int dealer;
         Random random = new Random();
@@ -86,7 +99,7 @@ public class Game {
                 if (playersTurn >= players.size() && cardsDealt < players.size()) {
                     playersTurn = 0;
                 }
-                players.get(playersTurn).playersHand.add(cardDeck.deck.get(i));
+                players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(i));
                 //System.out.println("Before deck size " + cardDeck.deckSize);
                 cardDeck.takeCard();
                 //System.out.println("After deck size " + cardDeck.deckSize);
@@ -113,16 +126,16 @@ public class Game {
     }
 
     public void drawCard() {
-        players.get(playersTurn).playersHand.add(cardDeck.deck.get(cardDeck.deckSize - 1));
+        players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(cardDeck.deckSize - 1));
         players.get(playersTurn).setHandSize(true);
         players.get(playersTurn).setPassed(true);
         cardDeck.takeCard();
     }
 
-    public void resetPlayersPassed(){
-        for (Player player: players) {
+    public void resetPlayersPassed() {
+        for (Player player : players) {
             player.setPassed(false);
-            System.out.println(player.passed);
+            System.out.println(player.getPassed());
 
         }
     }
@@ -133,32 +146,32 @@ public class Game {
         for (Card card : playersHand) {
             stringBuilder.append(cardNumber + 1);
             stringBuilder.append(" | ");
-            stringBuilder.append(card.cardType);
+            stringBuilder.append(card.getCardType());
             stringBuilder.append(" | ");
-            stringBuilder.append(card.title);
+            stringBuilder.append(card.getTitle());
             stringBuilder.append(" | ");
-            stringBuilder.append(card.chemistry);
+            stringBuilder.append(card.getChemistry());
             stringBuilder.append(" | ");
-            stringBuilder.append(card.classification);
+            stringBuilder.append(card.getClassification());
             stringBuilder.append(" | ");
-            stringBuilder.append(card.crystalSystem);
+            stringBuilder.append(card.getCrystalSystem());
             stringBuilder.append(" | ");
-            stringBuilder.append(card.occurrence);
+            stringBuilder.append(card.getOccurrence());
             stringBuilder.append("\n");
             stringBuilder.append("Hardness: ");
-            stringBuilder.append(card.hardness);
+            stringBuilder.append(card.getHardness());
             stringBuilder.append("\n");
             stringBuilder.append("Specific Gravity: ");
-            stringBuilder.append(card.specificGravity);
+            stringBuilder.append(card.getSpecificGravity());
             stringBuilder.append("\n");
             stringBuilder.append("Cleavage: ");
-            stringBuilder.append(card.cleavage);
+            stringBuilder.append(card.getCleavage());
             stringBuilder.append("\n");
             stringBuilder.append("Crustal Abundance: ");
-            stringBuilder.append(card.crustalAbundance);
+            stringBuilder.append(card.getCrustalAbundance());
             stringBuilder.append("\n");
             stringBuilder.append("Economic Value: ");
-            stringBuilder.append(card.economicValue);
+            stringBuilder.append(card.getEconomicValue());
             stringBuilder.append("\n");
             stringBuilder.append("\n");
             ++cardNumber;
@@ -171,34 +184,34 @@ public class Game {
 
     }
 
-    public StringBuilder playerSelection(){
+    public StringBuilder playerSelection() {
         String value = "";
         Card lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
 
-        switch(cardCategory){
+        switch (cardCategory) {
             case "hardness":
                 String[] lastHardness;
-                lastHardness = lastCardPlayed.hardness.split("-");
+                lastHardness = lastCardPlayed.getHardness().split("-");
                 value = lastHardness[lastHardness.length - 1];
                 break;
             case "specific gravity":
                 String[] lastSpecificGravity;
-                lastSpecificGravity = lastCardPlayed.hardness.split("-");
+                lastSpecificGravity = lastCardPlayed.getSpecificGravity().split("-");
                 value = lastSpecificGravity[lastSpecificGravity.length - 1];
                 break;
             case "cleavage":
-                value = lastCardPlayed.cleavage;
+                value = lastCardPlayed.getCleavage();
                 break;
             case "crustal abundance":
-                value = lastCardPlayed.crustalAbundance;
+                value = lastCardPlayed.getCrustalAbundance();
                 break;
             case "economic value":
-                value = lastCardPlayed.economicValue;
+                value = lastCardPlayed.getEconomicValue();
                 break;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(lastCardPlayed.title);
+        stringBuilder.append(lastCardPlayed.getTitle());
         stringBuilder.append(", ");
         stringBuilder.append(cardCategory);
         stringBuilder.append(", ");
@@ -207,16 +220,64 @@ public class Game {
         return stringBuilder;
     }
 
-    public boolean checkCard(Card selectedCard, boolean newCategorySelected) {
-        boolean validCard = false;
+    public int getCleavageValue(Card card) {
+        int cleavageValue = 0;
+        switch (card.getCleavage()) {
+            case "none":
+                cleavageValue = 1;
+                break;
+            case "poor/none":
+                cleavageValue = 2;
+                break;
+            case "1 poor":
+                cleavageValue = 3;
+                break;
+            case "2 poor":
+                cleavageValue = 4;
+                break;
+            case "1 good":
+                cleavageValue = 5;
+                break;
+            case "1 good, 1 poor":
+                cleavageValue = 6;
+                break;
+            case "2 good":
+                cleavageValue = 7;
+                break;
+            case "3 good":
+                cleavageValue = 8;
+                break;
+            case "1 perfect":
+                cleavageValue = 9;
+                break;
+            case "1 perfect, 1 good":
+                cleavageValue = 10;
+                break;
+            case "1 perfect, 2 good":
+                cleavageValue = 11;
+                break;
+            case "2 perfect, 1 good":
+                cleavageValue = 12;
+                break;
+            case "3 perfect":
+                cleavageValue = 13;
+                break;
+            case "4 perfect":
+                cleavageValue = 14;
+                break;
+            case "6 perfect":
+                cleavageValue = 15;
+        }
+        return cleavageValue;
+    }
+
+    public boolean checkCard(Card selectedCard) {
         Card lastCardPlayed;
         if (playDeck.deckSize == 0 || newCategorySelected) {
             return true;
         } else {
-            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1); // will be used for comparisons
+            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
         }
-
-        //each switch case must compare the cardCategory of selectedCard with the lastCardPlayed
 
         switch (cardCategory) {
             case "hardness":
@@ -224,12 +285,10 @@ public class Game {
                 String[] selectedHardness;
                 double lastHardnessNumber;
                 double selectedHardnessNumber;
-                lastHardness = lastCardPlayed.hardness.split("-");
-                selectedHardness = selectedCard.hardness.split("-");
+                lastHardness = lastCardPlayed.getHardness().split("-");
+                selectedHardness = selectedCard.getHardness().split("-");
                 lastHardnessNumber = Double.parseDouble(lastHardness[lastHardness.length - 1]);
                 selectedHardnessNumber = Double.parseDouble(selectedHardness[selectedHardness.length - 1]);
-                //System.out.println(lastHardnessNumber);
-                //System.out.println(selectedHardnessNumber);
                 return lastHardnessNumber < selectedHardnessNumber;
 
 
@@ -238,153 +297,56 @@ public class Game {
                 String[] selectedSpecificGravity;
                 double lastSpecificGravityNumber;
                 double selectedSpecificGravityNumber;
-                lastSpecificGravity = lastCardPlayed.specificGravity.split("-");
-                selectedSpecificGravity = selectedCard.specificGravity.split("-");
+                lastSpecificGravity = lastCardPlayed.getSpecificGravity().split("-");
+                selectedSpecificGravity = selectedCard.getSpecificGravity().split("-");
                 lastSpecificGravityNumber = Double.parseDouble(lastSpecificGravity[lastSpecificGravity.length - 1]);
                 selectedSpecificGravityNumber = Double.parseDouble(selectedSpecificGravity[selectedSpecificGravity.length - 1]);
-                //System.out.println(lastSpecificGravityNumber);
-                //System.out.println(selectedSpecificGravityNumber);
                 return lastSpecificGravityNumber < selectedSpecificGravityNumber;
 
             case "cleavage":
-                int lastCleavage = 0;
-                int selectedCleavage = 0;
-
-                switch (lastCardPlayed.cleavage) {
-                    case "none":
-                        lastCleavage = 1;
-                        break;
-                    case "poor/none":
-                        lastCleavage = 2;
-                        break;
-                    case "1 poor":
-                        lastCleavage = 3;
-                        break;
-                    case "2 poor":
-                        lastCleavage = 4;
-                        break;
-                    case "1 good":
-                        lastCleavage = 5;
-                        break;
-                    case "1 good, 1 poor":
-                        lastCleavage = 6;
-                        break;
-                    case "2 good":
-                        lastCleavage = 7;
-                        break;
-                    case "3 good":
-                        lastCleavage = 8;
-                        break;
-                    case "1 perfect":
-                        lastCleavage = 9;
-                        break;
-                    case "1 perfect, 1 good":
-                        lastCleavage = 10;
-                        break;
-                    case "1 perfect, 2 good":
-                        lastCleavage = 11;
-                        break;
-                    case "2 perfect, 1 good":
-                        lastCleavage = 12;
-                        break;
-                    case "3 perfect":
-                        lastCleavage = 13;
-                        break;
-                    case "4 perfect":
-                        lastCleavage = 14;
-                        break;
-                    case "6 perfect":
-                        lastCleavage = 15;
-                }
-
-                switch (selectedCard.cleavage) {
-                    case "none":
-                        selectedCleavage = 1;
-                        break;
-                    case "poor/none":
-                        selectedCleavage = 2;
-                        break;
-                    case "1 poor":
-                        selectedCleavage = 3;
-                        break;
-                    case "2 poor":
-                        selectedCleavage = 4;
-                        break;
-                    case "1 good":
-                        selectedCleavage = 5;
-                        break;
-                    case "1 good, 1 poor":
-                        selectedCleavage = 6;
-                        break;
-                    case "2 good":
-                        selectedCleavage = 7;
-                        break;
-                    case "3 good":
-                        selectedCleavage = 8;
-                        break;
-                    case "1 perfect":
-                        selectedCleavage = 9;
-                        break;
-                    case "1 perfect, 1 good":
-                        selectedCleavage = 10;
-                        break;
-                    case "1 perfect, 2 good":
-                        selectedCleavage = 11;
-                        break;
-                    case "2 perfect, 1 good":
-                        selectedCleavage = 12;
-                        break;
-                    case "3 perfect":
-                        selectedCleavage = 13;
-                        break;
-                    case "4 perfect":
-                        selectedCleavage = 14;
-                        break;
-                    case "6 perfect":
-                        selectedCleavage = 15;
-                }
+                int lastCleavage = getCleavageValue(lastCardPlayed);
+                int selectedCleavage = getCleavageValue(selectedCard);
                 return selectedCleavage > lastCleavage;
 
             case "crustal abundance":
-                if (lastCardPlayed.crustalAbundance.equals(selectedCard.crustalAbundance)) {
+                if (lastCardPlayed.getCrustalAbundance().equals(selectedCard.getCrustalAbundance())) {
                     return false;
-                } else if (lastCardPlayed.crustalAbundance.equals("ultratrace")) {
+                } else if (lastCardPlayed.getCrustalAbundance().equals("ultratrace")) {
                     return true;
-                } else if (lastCardPlayed.crustalAbundance.equals("trace") && selectedCard.crustalAbundance.equals("ultratrace")) {
+                } else if (lastCardPlayed.getCrustalAbundance().equals("trace") && selectedCard.getCrustalAbundance().equals("ultratrace")) {
                     return false;
-                } else if (lastCardPlayed.crustalAbundance.equals("low") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace"))) {
+                } else if (lastCardPlayed.getCrustalAbundance().equals("low") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace"))) {
                     return false;
-                } else if (lastCardPlayed.crustalAbundance.equals("moderate") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace") || selectedCard.crustalAbundance.equals("low"))) {
+                } else if (lastCardPlayed.getCrustalAbundance().equals("moderate") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace") || selectedCard.getCrustalAbundance().equals("low"))) {
                     return false;
-                } else if (lastCardPlayed.crustalAbundance.equals("high") && (selectedCard.crustalAbundance.equals("ultratrace") || selectedCard.crustalAbundance.equals("trace") || selectedCard.crustalAbundance.equals("low") || selectedCard.crustalAbundance.equals("moderate"))) {
+                } else if (lastCardPlayed.getCrustalAbundance().equals("high") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace") || selectedCard.getCrustalAbundance().equals("low") || selectedCard.getCrustalAbundance().equals("moderate"))) {
                     return false;
                 }
-                return lastCardPlayed.crustalAbundance.equals("very high");
+                return lastCardPlayed.getCrustalAbundance().equals("very high");
 
             case "economic value":
-                if (lastCardPlayed.economicValue.equals(selectedCard.economicValue)) {
+                if (lastCardPlayed.getEconomicValue().equals(selectedCard.getEconomicValue())) {
                     return false;
-                } else if (lastCardPlayed.economicValue.equals("trivial")) {
+                } else if (lastCardPlayed.getEconomicValue().equals("trivial")) {
                     return true;
-                } else if (lastCardPlayed.economicValue.equals("low") && selectedCard.economicValue.equals("trivial")) {
+                } else if (lastCardPlayed.getEconomicValue().equals("low") && selectedCard.getEconomicValue().equals("trivial")) {
                     return false;
-                } else if (lastCardPlayed.economicValue.equals("moderate") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low"))) {
+                } else if (lastCardPlayed.getEconomicValue().equals("moderate") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low"))) {
                     return false;
-                } else if (lastCardPlayed.economicValue.equals("high") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low") || selectedCard.economicValue.equals("moderate"))) {
+                } else if (lastCardPlayed.getEconomicValue().equals("high") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low") || selectedCard.getEconomicValue().equals("moderate"))) {
                     return false;
-                } else if (lastCardPlayed.economicValue.equals("very high") && (selectedCard.economicValue.equals("trivial") || selectedCard.economicValue.equals("low") || selectedCard.economicValue.equals("moderate") || selectedCard.economicValue.equals("high"))) {
+                } else if (lastCardPlayed.getEconomicValue().equals("very high") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low") || selectedCard.getEconomicValue().equals("moderate") || selectedCard.getEconomicValue().equals("high"))) {
                     return false;
                 }
-                return lastCardPlayed.economicValue.equals("I'm rich!");
+                return lastCardPlayed.getEconomicValue().equals("I'm rich!");
         }
-        return validCard;
+        return false;
     }
 
     public void playCard(Card selectedCard, int cardChoice) {
         playDeck.addCard(selectedCard);
-        players.get(playersTurn).playersHand.remove(cardChoice);
+        players.get(playersTurn).getPlayersHand().remove(cardChoice);
         players.get(playersTurn).setPassed(false);
-        //System.out.println(cardDeck.deck.get(cardDeck.getDeckSize()-1).title);
     }
 
 }

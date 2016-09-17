@@ -1,16 +1,16 @@
 public class Card {
-    String cardType;
-    String title;
-    String subtitle;
-    String chemistry;
-    String classification;
-    String crystalSystem;
-    String occurrence;
-    String hardness;
-    String specificGravity;
-    String cleavage;
-    String crustalAbundance;
-    String economicValue;
+    private String cardType;
+    private String title;
+    private String subtitle;
+    private String chemistry;
+    private String classification;
+    private String crystalSystem;
+    private String occurrence;
+    private String hardness;
+    private String specificGravity;
+    private String cleavage;
+    private String crustalAbundance;
+    private String economicValue;
 
     Card(String cardType, String title, String subtitle) {
         this.cardType = cardType;
@@ -59,8 +59,8 @@ public class Card {
         this.crystalSystem = newCrystalSystem;
     }
 
-    public void setHardness(String newHrdness) {
-        this.hardness = newHrdness;
+    public void setHardness(String newHardness) {
+        this.hardness = newHardness;
     }
 
     public void setSpecificGravity(String newSpecificGravity) {
@@ -93,43 +93,43 @@ public class Card {
         return this.title;
     }
 
-    public String setSubtitle() {
+    public String getSubtitle() {
         return this.subtitle;
     }
 
-    public String setChemistry() {
+    public String getChemistry() {
         return this.chemistry;
     }
 
-    public String setClassification() {
+    public String getClassification() {
         return this.classification;
     }
 
-    public String setCrystalSystem() {
+    public String getCrystalSystem() {
         return this.crystalSystem;
     }
 
-    public String setHardness() {
+    public String getHardness() {
         return this.hardness;
     }
 
-    public String setSpecificGravity() {
+    public String getSpecificGravity() {
         return this.specificGravity;
     }
 
-    public String setCleavage() {
+    public String getCleavage() {
         return this.cleavage;
     }
 
-    public String setCrustalAbundance() {
+    public String getCrustalAbundance() {
         return this.crustalAbundance;
     }
 
-    public String setEconomicValue() {
+    public String getEconomicValue() {
         return this.economicValue;
     }
 
-    public String setOccurrence() {
+    public String getOccurrence() {
         return this.occurrence;
     }
 }
