@@ -26,24 +26,31 @@ public class Game {
         Card card4 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "moderate", "moderate");
         Card card5 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 2 good", "high", "moderate");
         Card card6 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "4 perfect", "very high", "moderate");
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
+        Card trump1 = new Card("trump", "title1", "Hardness");
+        Card trump2 = new Card("trump", "title2", "Crustal abundance");
+        Card trump3 = new Card("trump", "title3", "Economic value");
+        Card trump4 = new Card("trump", "title4", "Cleavage");
+        Card trump5 = new Card("trump", "title5", "Specific gravity");
+        cardDeck.addCard(trump1);
+        cardDeck.addCard(trump2);
+        cardDeck.addCard(trump3);
+        cardDeck.addCard(trump4);
+        cardDeck.addCard(trump5);
+        cardDeck.addCard(trump1);
+        cardDeck.addCard(trump2);
+        cardDeck.addCard(trump3);
+        cardDeck.addCard(trump4);
+        cardDeck.addCard(trump5);
+        cardDeck.addCard(trump1);
+        cardDeck.addCard(trump2);
+        cardDeck.addCard(trump3);
+        cardDeck.addCard(trump4);
+        cardDeck.addCard(trump5);
+        cardDeck.addCard(trump1);
+        cardDeck.addCard(trump2);
+        cardDeck.addCard(trump3);
+        cardDeck.addCard(trump4);
+        cardDeck.addCard(trump5);
         cardDeck.addCard(card1);
         cardDeck.addCard(card2);
         cardDeck.addCard(card3);
@@ -91,20 +98,15 @@ public class Game {
         int dealer;
         Random random = new Random();
         dealer = random.nextInt(players.size());
-        //System.out.println("Dealer is" + dealer);
 
         for (int i = 0; i < 8; ++i) {
             int cardsDealt = 0;
-            //System.out.println("New round " + i);
             for (playersTurn = dealer + 1; cardsDealt < players.size(); ++playersTurn) {
                 if (playersTurn >= players.size() && cardsDealt < players.size()) {
                     playersTurn = 0;
                 }
                 players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(i));
-                //System.out.println("Before deck size " + cardDeck.deckSize);
                 cardDeck.takeCard();
-                //System.out.println("After deck size " + cardDeck.deckSize);
-                //System.out.println("Player " + playersTurn + " " + players.get(playersTurn).playersHand.get(i).title);
                 ++cardsDealt;
             }
 
@@ -136,7 +138,6 @@ public class Game {
     public void resetPlayersPassed() {
         for (Player player : players) {
             player.setPassed(false);
-            System.out.println(player.getPassed());
 
         }
     }
@@ -145,36 +146,49 @@ public class Game {
         StringBuilder stringBuilder = new StringBuilder();
         int cardNumber = 0;
         for (Card card : playersHand) {
-            stringBuilder.append(cardNumber + 1);
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getCardType());
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getTitle());
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getChemistry());
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getClassification());
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getCrystalSystem());
-            stringBuilder.append(" | ");
-            stringBuilder.append(card.getOccurrence());
-            stringBuilder.append("\n");
-            stringBuilder.append("Hardness: ");
-            stringBuilder.append(card.getHardness());
-            stringBuilder.append("\n");
-            stringBuilder.append("Specific Gravity: ");
-            stringBuilder.append(card.getSpecificGravity());
-            stringBuilder.append("\n");
-            stringBuilder.append("Cleavage: ");
-            stringBuilder.append(card.getCleavage());
-            stringBuilder.append("\n");
-            stringBuilder.append("Crustal Abundance: ");
-            stringBuilder.append(card.getCrustalAbundance());
-            stringBuilder.append("\n");
-            stringBuilder.append("Economic Value: ");
-            stringBuilder.append(card.getEconomicValue());
-            stringBuilder.append("\n");
-            stringBuilder.append("\n");
+
+            if (card.getCardType().equals("trump")) {
+                stringBuilder.append(cardNumber + 1);
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getCardType());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getTitle());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getSubtitle());
+                stringBuilder.append("\n");
+                stringBuilder.append("\n");
+            } else {
+                stringBuilder.append(cardNumber + 1);
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getCardType());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getTitle());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getChemistry());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getClassification());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getCrystalSystem());
+                stringBuilder.append(" | ");
+                stringBuilder.append(card.getOccurrence());
+                stringBuilder.append("\n");
+                stringBuilder.append("Hardness: ");
+                stringBuilder.append(card.getHardness());
+                stringBuilder.append("\n");
+                stringBuilder.append("Specific Gravity: ");
+                stringBuilder.append(card.getSpecificGravity());
+                stringBuilder.append("\n");
+                stringBuilder.append("Cleavage: ");
+                stringBuilder.append(card.getCleavage());
+                stringBuilder.append("\n");
+                stringBuilder.append("Crustal Abundance: ");
+                stringBuilder.append(card.getCrustalAbundance());
+                stringBuilder.append("\n");
+                stringBuilder.append("Economic Value: ");
+                stringBuilder.append(card.getEconomicValue());
+                stringBuilder.append("\n");
+                stringBuilder.append("\n");
+            }
             ++cardNumber;
         }
         stringBuilder.append(0);
@@ -187,36 +201,43 @@ public class Game {
 
     public StringBuilder playerSelection() {
         String value = "";
-        Card lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
-
-        switch (cardCategory) {
-            case "hardness":
-                String[] lastHardness;
-                lastHardness = lastCardPlayed.getHardness().split("-");
-                value = lastHardness[lastHardness.length - 1];
-                break;
-            case "specific gravity":
-                String[] lastSpecificGravity;
-                lastSpecificGravity = lastCardPlayed.getSpecificGravity().split("-");
-                value = lastSpecificGravity[lastSpecificGravity.length - 1];
-                break;
-            case "cleavage":
-                value = lastCardPlayed.getCleavage();
-                break;
-            case "crustal abundance":
-                value = lastCardPlayed.getCrustalAbundance();
-                break;
-            case "economic value":
-                value = lastCardPlayed.getEconomicValue();
-                break;
-        }
-
+        Card lastCardPlayed = getLastCardPlayed();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(lastCardPlayed.getTitle());
-        stringBuilder.append(", ");
-        stringBuilder.append(cardCategory);
-        stringBuilder.append(", ");
-        stringBuilder.append(value);
+
+        if (lastCardPlayed.getCardType().equals("trump")) {
+            stringBuilder.append(lastCardPlayed.getTitle());
+            stringBuilder.append(", ");
+            stringBuilder.append(lastCardPlayed.getSubtitle());
+        } else {
+            switch (cardCategory) {
+                case "hardness":
+                    String[] lastHardness;
+                    lastHardness = lastCardPlayed.getHardness().split("-");
+                    value = lastHardness[lastHardness.length - 1];
+                    break;
+                case "specific gravity":
+                    String[] lastSpecificGravity;
+                    lastSpecificGravity = lastCardPlayed.getSpecificGravity().split("-");
+                    value = lastSpecificGravity[lastSpecificGravity.length - 1];
+                    break;
+                case "cleavage":
+                    value = lastCardPlayed.getCleavage();
+                    break;
+                case "crustal abundance":
+                    value = lastCardPlayed.getCrustalAbundance();
+                    break;
+                case "economic value":
+                    value = lastCardPlayed.getEconomicValue();
+                    break;
+            }
+
+
+            stringBuilder.append(lastCardPlayed.getTitle());
+            stringBuilder.append(", ");
+            stringBuilder.append(cardCategory);
+            stringBuilder.append(", ");
+            stringBuilder.append(value);
+        }
 
         return stringBuilder;
     }
@@ -277,7 +298,11 @@ public class Game {
         if (playDeck.deckSize == 0 || newCategorySelected) {
             return true;
         } else {
-            lastCardPlayed = playDeck.deck.get(playDeck.getDeckSize() - 1);
+            lastCardPlayed = getLastCardPlayed();
+        }
+
+        if (selectedCard.getCardType().equals("trump") || lastCardPlayed.getCardType().equals("trump")) {
+            return true;
         }
 
         switch (cardCategory) {
@@ -351,9 +376,13 @@ public class Game {
         players.get(playersTurn).setPassed(false);
     }
 
-    public void winningPlayer(){
+    public void winningPlayer() {
         winningPlayers.add(players.get(playersTurn));
         players.remove(players.get(playersTurn));
+    }
+
+    public Card getLastCardPlayed() {
+        return playDeck.deck.get(playDeck.getDeckSize() - 1);
     }
 
 }

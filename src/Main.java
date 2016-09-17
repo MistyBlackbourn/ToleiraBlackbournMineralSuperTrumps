@@ -56,7 +56,9 @@ public class Main {
                         game.winningPlayer();
 
                     }
-                    game.nextPlayer();
+                    if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                        game.nextPlayer();
+                    }
                 }
             } else if (menuSelection == 2) {
                 displayRules();
@@ -82,7 +84,7 @@ public class Main {
             }
         } while (choice > game.players.get(game.playersTurn).getHandSize() || choice < 0);
         if (!game.categoryIsSelected && choice != 0) {
-            getCategory();
+            getCategory(game.players.get(game.playersTurn).getPlayersHand().get(choice-1));
 
         }
         return choice;
@@ -132,35 +134,41 @@ public class Main {
 
     }
 
-    public static void getCategory() {
-        //Add error checking
+    public static void getCategory(Card playersChosenCard) {
         int selection = 0;
 
-        do {
-            try {
-                Scanner userInput = new Scanner(System.in);
-                System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
-                        " 4 - Crustal Abundance \n 5 - Economic Value");
-                selection = userInput.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Selection is invalid");
+        if (playersChosenCard.getCardType().equals("trump")) {
+            String subtitle = playersChosenCard.getSubtitle();
+            game.cardCategory = subtitle.toLowerCase();
+
+        } else {
+
+            do {
+                try {
+                    Scanner userInput = new Scanner(System.in);
+                    System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
+                            " 4 - Crustal Abundance \n 5 - Economic Value");
+                    selection = userInput.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Selection is invalid");
+                }
+            } while (selection < 1 || selection > 5);
+
+            if (selection == 1) {
+                game.cardCategory = "hardness";
+            } else if (selection == 2) {
+                game.cardCategory = "specific gravity";
+            } else if (selection == 3) {
+                game.cardCategory = "cleavage";
+            } else if (selection == 4) {
+                game.cardCategory = "crustal abundance";
+            } else if (selection == 5) {
+                game.cardCategory = "economic value";
             }
-        } while (selection < 1 || selection > 5);
-        if (selection == 1) {
-            game.cardCategory = "hardness";
-        } else if (selection == 2) {
-            game.cardCategory = "specific gravity";
-        } else if (selection == 3) {
-            game.cardCategory = "cleavage";
-        } else if (selection == 4) {
-            game.cardCategory = "crustal abundance";
-        } else if (selection == 5) {
-            game.cardCategory = "economic value";
         }
         game.categoryIsSelected = true;
         game.newCategorySelected = true;
         game.resetPlayersPassed();
-        System.out.println(game.cardCategory);
     }
 
     public static void displayRules() {
