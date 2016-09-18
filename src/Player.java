@@ -4,7 +4,7 @@ public class Player {
     private String playerName;
     private boolean passed = false;
     private int handSize = 8;
-    private ArrayList<Card> playersHand = new ArrayList<>(); //must test this when Card class is created
+    private ArrayList<Card> playersHand = new ArrayList<>();
 
     Player(String newName) {
         playerName = newName;

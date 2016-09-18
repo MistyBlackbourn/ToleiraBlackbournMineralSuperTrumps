@@ -20,17 +20,17 @@ public class Game {
     //For testing Card and Deck class.
     //This needs to be changed to read xml file.
     public void createCards() {
-        Card card1 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "none", "ultratrace", "moderate");
-        Card card2 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 1 good", "trace", "moderate");
-        Card card3 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "2 perfect", "low", "moderate");
-        Card card4 = new Card("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "moderate", "moderate");
-        Card card5 = new Card("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 2 good", "high", "moderate");
-        Card card6 = new Card("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "4 perfect", "very high", "moderate");
-        Card trump1 = new Card("trump", "title1", "Hardness");
-        Card trump2 = new Card("trump", "title2", "Crustal abundance");
-        Card trump3 = new Card("trump", "title3", "Economic value");
-        Card trump4 = new Card("trump", "title4", "Cleavage");
-        Card trump5 = new Card("trump", "title5", "Specific gravity");
+        Card card1 = new PlayCard("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "none", "ultratrace", "moderate");
+        Card card2 = new PlayCard("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 1 good", "trace", "moderate");
+        Card card3 = new PlayCard("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "2 perfect", "low", "moderate");
+        Card card4 = new PlayCard("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "moderate", "moderate");
+        Card card5 = new PlayCard("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 2 good", "high", "moderate");
+        Card card6 = new PlayCard("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "4 perfect", "very high", "moderate");
+        Card trump1 = new TrumpCard("trump", "title1", "Hardness");
+        Card trump2 = new TrumpCard("trump", "title2", "Crustal abundance");
+        Card trump3 = new TrumpCard("trump", "title3", "Economic value");
+        Card trump4 = new TrumpCard("trump", "title4", "Cleavage");
+        Card trump5 = new TrumpCard("trump", "title5", "Specific gravity");
         cardDeck.addCard(trump1);
         cardDeck.addCard(trump2);
         cardDeck.addCard(trump3);
@@ -94,6 +94,7 @@ public class Game {
     }
 
     // randomly selects a dealer and sets the player that goes first
+    // Dealer deals card starting with the next player until all players have 8 cards
     public void dealCards() {
         int dealer;
         Random random = new Random();
@@ -146,7 +147,6 @@ public class Game {
         StringBuilder stringBuilder = new StringBuilder();
         int cardNumber = 0;
         for (Card card : playersHand) {
-
             if (card.getCardType().equals("trump")) {
                 stringBuilder.append(cardNumber + 1);
                 stringBuilder.append(" | ");

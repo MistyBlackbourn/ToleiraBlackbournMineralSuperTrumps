@@ -25,7 +25,6 @@ public class Main {
                 game.createCards();
                 game.shuffleDeck();
                 game.dealCards();
-                //int i = 0;
                 while (game.players.size() > 1) {
                     game.validPlayer();
                     System.out.println(game.players.get(game.playersTurn).getName());
