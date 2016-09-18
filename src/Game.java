@@ -1,4 +1,8 @@
+import com.dd.plist.*;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -20,6 +24,29 @@ public class Game {
     //For testing Card and Deck class.
     //This needs to be changed to read xml file.
     public void createCards() {
+        try {
+            File file = new File(".idea/MstCards.plist");
+            NSDictionary rootDict = (NSDictionary) PropertyListParser.parse(file);
+            NSObject[] cards = ((NSArray) rootDict.objectForKey("cards")).getArray();
+            for (int i = 0; i < cards.length; ++i) {
+                NSDictionary card = (NSDictionary) cards[i];
+
+                System.out.println(Arrays.toString(card.allKeys()));
+                if (card.containsValue("play")) {
+                    System.out.println("Yes");
+
+                } else {
+                    System.out.println("No");
+                }
+                System.out.println(card);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
         Card card1 = new PlayCard("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "none", "ultratrace", "moderate");
         Card card2 = new PlayCard("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 1 good", "trace", "moderate");
         Card card3 = new PlayCard("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "2 perfect", "low", "moderate");
