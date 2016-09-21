@@ -2,7 +2,7 @@ public class TrumpCard extends Card {
     private String subtitle;
 
 
-    TrumpCard(String cardType, String title, String subtitle) {
+    TrumpCard(String title, String cardType, String subtitle) {
         super(cardType, title);
         this.subtitle = subtitle;
     }

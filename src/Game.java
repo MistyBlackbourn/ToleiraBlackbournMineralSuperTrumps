@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class Game {
     Deck cardDeck = new Deck();
-    Deck playDeck = new Deck();
+    Deck ruleDeck = new Deck();
+    Deck playedDeck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Player> winningPlayers = new ArrayList<>();
     String cardCategory;
@@ -24,88 +25,29 @@ public class Game {
     //For testing Card and Deck class.
     //This needs to be changed to read xml file.
     public void createCards() {
+        Card new_card;
         try {
             File file = new File(".idea/MstCards.plist");
             NSDictionary rootDict = (NSDictionary) PropertyListParser.parse(file);
             NSObject[] cards = ((NSArray) rootDict.objectForKey("cards")).getArray();
-            for (int i = 0; i < cards.length; ++i) {
-                NSDictionary card = (NSDictionary) cards[i];
-
-                System.out.println(Arrays.toString(card.allKeys()));
-                if (card.containsValue("play")) {
-                    System.out.println("play");
-                } else if(card.containsValue("trump")) {
-                    System.out.println("trump");
-                } else if(card.containsValue("rule")) {
-                    System.out.println("rule");
+            for (NSObject card : cards) {
+                NSDictionary cardDictionary = (NSDictionary) card;
+                if (cardDictionary.containsValue("play")) {
+                    new_card = new PlayCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("chemistry").toString(), cardDictionary.objectForKey("classification").toString(), cardDictionary.objectForKey("crystal_system").toString(), cardDictionary.objectForKey("occurrence").toString(), cardDictionary.objectForKey("hardness").toString(), cardDictionary.objectForKey("specific_gravity").toString(), cardDictionary.objectForKey("cleavage").toString(), cardDictionary.objectForKey("crustal_abundance").toString(), cardDictionary.objectForKey("economic_value").toString());
+                    cardDeck.addCard(new_card);
+                } else if (cardDictionary.containsValue("trump")) {
+                    new_card = new TrumpCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("subtitle").toString());
+                    cardDeck.addCard(new_card);
+                } else if (cardDictionary.containsValue("rule")) {
+                    new_card = new RuleCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("subtitle").toString());
+                    ruleDeck.addCard(new_card);
                 } else {
-                    System.out.println("no");
+                    System.out.println("Problem with Card");
                 }
-                System.out.println(card);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
-
-
-        Card card1 = new PlayCard("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "none", "ultratrace", "moderate");
-        Card card2 = new PlayCard("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 1 good", "trace", "moderate");
-        Card card3 = new PlayCard("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "2 perfect", "low", "moderate");
-        Card card4 = new PlayCard("Quartz", "play", "SiO_2", "tectosilicate", "hexagonal", "occurrence", "7", "2.65", "poor/none", "moderate", "moderate");
-        Card card5 = new PlayCard("Plagioclase", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "1 perfect, 2 good", "high", "moderate");
-        Card card6 = new PlayCard("Card Three", "play", "Na Al Si_3 0_8-Ca Al_2 Si_2 0_8", "tectosilicate", "triclinic", "occurrence", "6-6.5", "2.6-2.8", "4 perfect", "very high", "moderate");
-        Card trump1 = new TrumpCard("trump", "title1", "Hardness");
-        Card trump2 = new TrumpCard("trump", "title2", "Crustal abundance");
-        Card trump3 = new TrumpCard("trump", "title3", "Economic value");
-        Card trump4 = new TrumpCard("trump", "title4", "Cleavage");
-        Card trump5 = new TrumpCard("trump", "title5", "Specific gravity");
-        cardDeck.addCard(trump1);
-        cardDeck.addCard(trump2);
-        cardDeck.addCard(trump3);
-        cardDeck.addCard(trump4);
-        cardDeck.addCard(trump5);
-        cardDeck.addCard(trump1);
-        cardDeck.addCard(trump2);
-        cardDeck.addCard(trump3);
-        cardDeck.addCard(trump4);
-        cardDeck.addCard(trump5);
-        cardDeck.addCard(trump1);
-        cardDeck.addCard(trump2);
-        cardDeck.addCard(trump3);
-        cardDeck.addCard(trump4);
-        cardDeck.addCard(trump5);
-        cardDeck.addCard(trump1);
-        cardDeck.addCard(trump2);
-        cardDeck.addCard(trump3);
-        cardDeck.addCard(trump4);
-        cardDeck.addCard(trump5);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-        cardDeck.addCard(card1);
-        cardDeck.addCard(card2);
-        cardDeck.addCard(card3);
-        cardDeck.addCard(card4);
-        cardDeck.addCard(card5);
-        cardDeck.addCard(card6);
-
     }
 
     public boolean playersPassed() {
@@ -325,7 +267,7 @@ public class Game {
 
     public boolean checkCard(Card selectedCard) {
         Card lastCardPlayed;
-        if (playDeck.deckSize == 0 || newCategorySelected) {
+        if (playedDeck.deckSize == 0 || newCategorySelected) {
             return true;
         } else {
             lastCardPlayed = getLastCardPlayed();
@@ -400,7 +342,7 @@ public class Game {
     }
 
     public void playCard(Card selectedCard, int cardChoice) {
-        playDeck.addCard(selectedCard);
+        playedDeck.addCard(selectedCard);
         players.get(playersTurn).getPlayersHand().remove(cardChoice);
         players.get(playersTurn).setHandSize(false);
         players.get(playersTurn).setPassed(false);
@@ -412,7 +354,7 @@ public class Game {
     }
 
     public Card getLastCardPlayed() {
-        return playDeck.deck.get(playDeck.getDeckSize() - 1);
+        return playedDeck.deck.get(playedDeck.getDeckSize() - 1);
     }
 
 }
