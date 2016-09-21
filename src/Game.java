@@ -33,10 +33,13 @@ public class Game {
 
                 System.out.println(Arrays.toString(card.allKeys()));
                 if (card.containsValue("play")) {
-                    System.out.println("Yes");
-
+                    System.out.println("play");
+                } else if(card.containsValue("trump")) {
+                    System.out.println("trump");
+                } else if(card.containsValue("rule")) {
+                    System.out.println("rule");
                 } else {
-                    System.out.println("No");
+                    System.out.println("no");
                 }
                 System.out.println(card);
             }

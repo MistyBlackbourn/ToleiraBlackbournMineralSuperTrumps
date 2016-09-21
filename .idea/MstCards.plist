@@ -58,7 +58,7 @@
 			<string>Slide02</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Plagioclase</string>
@@ -105,7 +105,7 @@
 			<string>Slide03</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Orthoclase</string>
@@ -153,7 +153,7 @@
 			<string>Slide04</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Biotite</string>
@@ -199,7 +199,7 @@
 			<string>Slide05</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Muscovite</string>
@@ -245,7 +245,7 @@
 			<string>Slide06</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Hornblende</string>
@@ -289,7 +289,7 @@
 			<string>Slide07</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Actinolite</string>
@@ -333,7 +333,7 @@
 			<string>Slide08</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Glaucophane</string>
@@ -377,7 +377,7 @@
 			<string>Slide09</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Olivine</string>
@@ -422,7 +422,7 @@
 			<string>Slide10</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Garnet</string>
@@ -467,7 +467,7 @@
 			<string>Slide11</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Titanite</string>
@@ -511,7 +511,7 @@
 			<string>Slide12</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Zircon</string>
@@ -556,7 +556,7 @@
 			<string>Slide13</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Augite</string>
@@ -600,7 +600,7 @@
 			<string>Slide14</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Orthopyroxene</string>
@@ -644,7 +644,7 @@
 			<string>Slide15</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Chlorite</string>
@@ -686,7 +686,7 @@
 			<string>Slide16</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Antigorite</string>
@@ -730,7 +730,7 @@
 			<string>Slide17</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Talc</string>
@@ -772,7 +772,7 @@
 			<string>Slide18</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Kaolinite</string>
@@ -815,7 +815,7 @@
 			<string>Slide19</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Andalusite</string>
@@ -857,7 +857,7 @@
 			<string>Slide20</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Kyanite</string>
@@ -902,7 +902,7 @@
 			<string>Slide21</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Sillimanite</string>
@@ -946,7 +946,7 @@
 			<string>Slide22</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Staurolite</string>
@@ -989,7 +989,7 @@
 			<string>Slide23</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Epidote</string>
@@ -1033,7 +1033,7 @@
 			<string>Slide24</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Tourmaline</string>
@@ -1076,7 +1076,7 @@
 			<string>Slide25</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Topaz</string>
@@ -1120,7 +1120,7 @@
 			<string>Slide26</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Beryl</string>
@@ -1164,7 +1164,7 @@
 			<string>Slide27</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Pyrite</string>
@@ -1208,7 +1208,7 @@
 			<string>Slide28</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Pyrrhotite</string>
@@ -1252,7 +1252,7 @@
 			<string>Slide29</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Chalcopyrite</string>
@@ -1296,7 +1296,7 @@
 			<string>Slide30</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Galena</string>
@@ -1339,7 +1339,7 @@
 			<string>Slide31</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Sphalerite</string>
@@ -1382,7 +1382,7 @@
 			<string>Slide32</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Molybdenite</string>
@@ -1426,7 +1426,7 @@
 			<string>Slide33</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Gold</string>
@@ -1470,7 +1470,7 @@
 			<string>Slide34</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Diamond</string>
@@ -1515,7 +1515,7 @@
 			<string>Slide35</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Graphite</string>
@@ -1559,7 +1559,7 @@
 			<string>Slide36</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Halite</string>
@@ -1602,7 +1602,7 @@
 			<string>Slide37</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Fluorite</string>
@@ -1645,7 +1645,7 @@
 			<string>Slide38</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Gypsum</string>
@@ -1689,7 +1689,7 @@
 			<string>Slide39</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Barite</string>
@@ -1734,7 +1734,7 @@
 			<string>Slide40</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Apatite</string>
@@ -1779,7 +1779,7 @@
 			<string>Slide41</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Monazite</string>
@@ -1824,7 +1824,7 @@
 			<string>Slide42</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Calcite</string>
@@ -1869,7 +1869,7 @@
 			<string>Slide43</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Dolomite</string>
@@ -1914,7 +1914,7 @@
 			<string>Slide44</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Magnesite</string>
@@ -1959,7 +1959,7 @@
 			<string>Slide45</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Siderite</string>
@@ -2004,7 +2004,7 @@
 			<string>Slide46</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Magnetite</string>
@@ -2049,7 +2049,7 @@
 			<string>Slide47</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Hematite</string>
@@ -2093,7 +2093,7 @@
 			<string>Slide48</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Chromite</string>
@@ -2137,7 +2137,7 @@
 			<string>Slide49</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Ilmenite</string>
@@ -2183,7 +2183,7 @@
 			<string>Slide50</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Rutile</string>
@@ -2227,7 +2227,7 @@
 			<string>Slide51</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Corundum</string>
@@ -2271,7 +2271,7 @@
 			<string>Slide52</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Cassiterite</string>
@@ -2316,7 +2316,7 @@
 			<string>Slide53</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Gibbsite</string>
@@ -2360,7 +2360,7 @@
 			<string>Slide54</string>
 
 			<key>card_type</key>
-			<key>play</key>
+			<string>play</string>
 
 			<key>title</key>
 			<string>Goethite</string>
@@ -2403,7 +2403,7 @@
 			<string>Slide55</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Miner</string>
@@ -2420,7 +2420,7 @@
 			<string>Slide56</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Petrologist</string>
@@ -2437,7 +2437,7 @@
 			<string>Slide57</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Gemmologist</string>
@@ -2454,7 +2454,7 @@
 			<string>Slide58</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Mineralogist</string>
@@ -2471,7 +2471,7 @@
 			<string>Slide59</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Geophysicist</string>
@@ -2488,7 +2488,7 @@
 			<string>Slide60</string>
 
 			<key>card_type</key>
-			<key>trump</key>
+			<string>trump</string>
 
 			<key>title</key>
 			<string>The Geologist</string>
@@ -2505,7 +2505,7 @@
 			<string>Slide61</string>
 
 			<key>card_type</key>
-			<key>rule</key>
+			<string>rule</string>
 
 			<key>title</key>
 			<string>About Mineral Supertrumps</string>
@@ -2522,7 +2522,7 @@
 			<string>Slide62</string>
 
 			<key>card_type</key>
-			<key>rule</key>
+			<string>rule</string>
 
 			<key>title</key>
 			<string>How to play</string>
@@ -2539,7 +2539,7 @@
 			<string>Slide63</string>
 
 			<key>card_type</key>
-			<key>rule</key>
+			<string>rule</string>
 
 			<key>title</key>
 			<string>Trump Categories</string>
