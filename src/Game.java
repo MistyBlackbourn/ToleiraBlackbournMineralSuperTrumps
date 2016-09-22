@@ -1,6 +1,7 @@
 import com.dd.plist.*;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public class Game {
             for (NSObject card : cards) {
                 NSDictionary cardDictionary = (NSDictionary) card;
                 if (cardDictionary.containsValue("play")) {
-                    new_card = new PlayCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("chemistry").toString(), cardDictionary.objectForKey("classification").toString(), cardDictionary.objectForKey("crystal_system").toString(), cardDictionary.objectForKey("occurrence").toString(), cardDictionary.objectForKey("hardness").toString(), cardDictionary.objectForKey("specific_gravity").toString(), cardDictionary.objectForKey("cleavage").toString(), cardDictionary.objectForKey("crustal_abundance").toString(), cardDictionary.objectForKey("economic_value").toString());
+                    new_card = new PlayCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("chemistry").toString(), cardDictionary.objectForKey("classification").toString(), cardDictionary.objectForKey("crystal_system").toString(), (NSArray)cardDictionary.objectForKey("occurrence"), cardDictionary.objectForKey("hardness").toString(), cardDictionary.objectForKey("specific_gravity").toString(), cardDictionary.objectForKey("cleavage").toString(), cardDictionary.objectForKey("crustal_abundance").toString(), cardDictionary.objectForKey("economic_value").toString());
                     cardDeck.addCard(new_card);
                 } else if (cardDictionary.containsValue("trump")) {
                     new_card = new TrumpCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("subtitle").toString());
@@ -78,7 +79,7 @@ public class Game {
                 if (playersTurn >= players.size() && cardsDealt < players.size()) {
                     playersTurn = 0;
                 }
-                players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(i));
+                players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(cardDeck.getDeckSize()-1));
                 cardDeck.takeCard();
                 ++cardsDealt;
             }
@@ -102,10 +103,12 @@ public class Game {
     }
 
     public void drawCard() {
-        players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(cardDeck.deckSize - 1));
-        players.get(playersTurn).setHandSize(true);
+        if (cardDeck.deckSize != 0) {
+            players.get(playersTurn).getPlayersHand().add(cardDeck.deck.get(cardDeck.deckSize - 1));
+            players.get(playersTurn).setHandSize(true);
+            cardDeck.takeCard();
+        }
         players.get(playersTurn).setPassed(true);
-        cardDeck.takeCard();
     }
 
     public void resetPlayersPassed() {
@@ -142,7 +145,10 @@ public class Game {
                 stringBuilder.append(" | ");
                 stringBuilder.append(card.getCrystalSystem());
                 stringBuilder.append(" | ");
-                stringBuilder.append(card.getOccurrence());
+                for(int i = 0; i <= card.getOccurrence().indexOfObject(card.getOccurrence().lastObject()); i++){
+                    stringBuilder.append(card.getOccurrence().objectAtIndex(i).toString());
+                    stringBuilder.append("  ");
+                }
                 stringBuilder.append("\n");
                 stringBuilder.append("Hardness: ");
                 stringBuilder.append(card.getHardness());

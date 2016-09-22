@@ -1,8 +1,11 @@
+import com.dd.plist.NSArray;
+import com.dd.plist.NSObject;
+
 public class PlayCard extends Card {
     private String chemistry;
     private String classification;
     private String crystalSystem;
-    private String occurrence;
+    private NSArray occurrence;
     private String hardness;
     private String specificGravity;
     private String cleavage;
@@ -10,7 +13,7 @@ public class PlayCard extends Card {
     private String economicValue;
 
 
-    PlayCard(String title, String cardType, String chemistry, String classification, String crystalSystem, String occurrence,
+    PlayCard(String title, String cardType, String chemistry, String classification, String crystalSystem, NSArray occurrence,
              String hardness, String specificGravity, String cleavage, String crustalAbundance, String economicValue) {
         super(cardType, title);
         this.chemistry = chemistry;
@@ -58,7 +61,7 @@ public class PlayCard extends Card {
         this.economicValue = newEconomicValue;
     }
 
-    public void setOccurrence(String newOccurrence) {
+    public void setOccurrence(NSArray newOccurrence) {
         this.occurrence = newOccurrence;
     }
 
@@ -96,7 +99,7 @@ public class PlayCard extends Card {
         return this.economicValue;
     }
 
-    public String getOccurrence() {
+    public NSArray getOccurrence() {
         return this.occurrence;
     }
 

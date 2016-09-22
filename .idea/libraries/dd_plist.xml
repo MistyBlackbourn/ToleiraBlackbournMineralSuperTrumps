@@ -2,6 +2,7 @@
   <library name="dd-plist">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../dd-plist/dd-plist/target/dd-plist.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/dd-plist/target/dd-plist.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,3 +1,5 @@
+import com.dd.plist.NSArray;
+
 public abstract class Card {
     private String cardType;
     private String title;
@@ -41,5 +43,5 @@ public abstract class Card {
 
     public abstract String getEconomicValue();
 
-    public abstract String getOccurrence();
+    public abstract NSArray getOccurrence();
 }

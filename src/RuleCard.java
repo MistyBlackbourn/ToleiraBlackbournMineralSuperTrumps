@@ -1,3 +1,5 @@
+import com.dd.plist.NSArray;
+
 public class RuleCard extends Card {
     private String subtitle;
 
@@ -52,7 +54,7 @@ public class RuleCard extends Card {
         return null;
     }
 
-    public String getOccurrence() {
+    public NSArray getOccurrence() {
         return null;
     }
 

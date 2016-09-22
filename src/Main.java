@@ -55,8 +55,10 @@ public class Main {
                         game.winningPlayer();
 
                     }
-                    if (!game.getLastCardPlayed().getCardType().equals("trump")) {
-                        game.nextPlayer();
+                    if (game.playedDeck.getDeckSize() != 0) {
+                        if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                            game.nextPlayer();
+                        }
                     }
                 }
             } else if (menuSelection == 2) {
@@ -76,6 +78,7 @@ public class Main {
                     System.out.println("You may select any card and next you will need to select a new category");
                 }
                 Scanner cardInput = new Scanner(System.in);
+                System.out.print(">>>");
                 choice = cardInput.nextInt();
 
             } catch (InputMismatchException e) {
@@ -94,6 +97,7 @@ public class Main {
         do {
             try {
                 Scanner userInput = new Scanner(System.in);
+                System.out.print(">>>");
                 input = userInput.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Please make a valid selection");
@@ -147,6 +151,7 @@ public class Main {
                     Scanner userInput = new Scanner(System.in);
                     System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
                             " 4 - Crustal Abundance \n 5 - Economic Value");
+                    System.out.print(">>>");
                     selection = userInput.nextInt();
                 } catch (InputMismatchException e) {
                     System.out.println("Selection is invalid");
