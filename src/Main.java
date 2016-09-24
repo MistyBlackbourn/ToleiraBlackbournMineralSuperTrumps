@@ -201,9 +201,7 @@ public class Main {
     }
 
     public static void displayRules() {
-        //use string builder in Game to get rules
-        //return the String here to display
-        System.out.println("THE RULES ARE...");
+        System.out.println(game.getRules());
     }
 
 }
