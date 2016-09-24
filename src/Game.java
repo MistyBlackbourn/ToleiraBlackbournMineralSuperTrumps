@@ -271,6 +271,56 @@ public class Game {
         return cleavageValue;
     }
 
+    public int getCrustalAbundanceValue(Card card) {
+        int crustalAbundanceValue = 0;
+        switch (card.getCleavage()) {
+            case "ultratrace":
+                crustalAbundanceValue = 1;
+                break;
+            case "trace":
+                crustalAbundanceValue = 2;
+                break;
+            case "low":
+                crustalAbundanceValue = 3;
+                break;
+            case "moderate":
+                crustalAbundanceValue = 4;
+                break;
+            case "high":
+                crustalAbundanceValue = 5;
+                break;
+            case "very high":
+                crustalAbundanceValue = 6;
+                break;
+        }
+        return crustalAbundanceValue;
+    }
+
+    public int getEconomicValueValue(Card card) {
+        int economicValueValue = 0;
+        switch (card.getCleavage()) {
+            case "trivial":
+                economicValueValue = 1;
+                break;
+            case "low":
+                economicValueValue = 2;
+                break;
+            case "moderate":
+                economicValueValue = 3;
+                break;
+            case "high":
+                economicValueValue = 4;
+                break;
+            case "very high":
+                economicValueValue = 5;
+                break;
+            case "I'm rich!":
+                economicValueValue = 6;
+                break;
+        }
+        return economicValueValue;
+    }
+
     public boolean checkCard(Card selectedCard) {
         Card lastCardPlayed;
         if (playedDeck.deckSize == 0 || newCategorySelected) {
@@ -310,39 +360,17 @@ public class Game {
             case "cleavage":
                 int lastCleavage = getCleavageValue(lastCardPlayed);
                 int selectedCleavage = getCleavageValue(selectedCard);
-                return selectedCleavage > lastCleavage;
+                return lastCleavage  < selectedCleavage;
 
             case "crustal abundance":
-                if (lastCardPlayed.getCrustalAbundance().equals(selectedCard.getCrustalAbundance())) {
-                    return false;
-                } else if (lastCardPlayed.getCrustalAbundance().equals("ultratrace")) {
-                    return true;
-                } else if (lastCardPlayed.getCrustalAbundance().equals("trace") && selectedCard.getCrustalAbundance().equals("ultratrace")) {
-                    return false;
-                } else if (lastCardPlayed.getCrustalAbundance().equals("low") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace"))) {
-                    return false;
-                } else if (lastCardPlayed.getCrustalAbundance().equals("moderate") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace") || selectedCard.getCrustalAbundance().equals("low"))) {
-                    return false;
-                } else if (lastCardPlayed.getCrustalAbundance().equals("high") && (selectedCard.getCrustalAbundance().equals("ultratrace") || selectedCard.getCrustalAbundance().equals("trace") || selectedCard.getCrustalAbundance().equals("low") || selectedCard.getCrustalAbundance().equals("moderate"))) {
-                    return false;
-                }
-                return lastCardPlayed.getCrustalAbundance().equals("very high");
+                int lastCrustalAbundance = getCrustalAbundanceValue(lastCardPlayed);
+                int selectedCrustalAbundance = getCrustalAbundanceValue(selectedCard);
+                return lastCrustalAbundance < selectedCrustalAbundance;
 
             case "economic value":
-                if (lastCardPlayed.getEconomicValue().equals(selectedCard.getEconomicValue())) {
-                    return false;
-                } else if (lastCardPlayed.getEconomicValue().equals("trivial")) {
-                    return true;
-                } else if (lastCardPlayed.getEconomicValue().equals("low") && selectedCard.getEconomicValue().equals("trivial")) {
-                    return false;
-                } else if (lastCardPlayed.getEconomicValue().equals("moderate") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low"))) {
-                    return false;
-                } else if (lastCardPlayed.getEconomicValue().equals("high") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low") || selectedCard.getEconomicValue().equals("moderate"))) {
-                    return false;
-                } else if (lastCardPlayed.getEconomicValue().equals("very high") && (selectedCard.getEconomicValue().equals("trivial") || selectedCard.getEconomicValue().equals("low") || selectedCard.getEconomicValue().equals("moderate") || selectedCard.getEconomicValue().equals("high"))) {
-                    return false;
-                }
-                return lastCardPlayed.getEconomicValue().equals("I'm rich!");
+                int lastEconomicValue = getEconomicValueValue(lastCardPlayed);
+                int selectedEconomicValue = getEconomicValueValue(selectedCard);
+                return lastEconomicValue < selectedEconomicValue;
         }
         return false;
     }

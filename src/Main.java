@@ -85,9 +85,11 @@ public class Main {
                 System.out.println("Please enter a valid number");
             }
         } while (choice > game.players.get(game.playersTurn).getHandSize() || choice < 0);
-        if (!game.categoryIsSelected && choice != 0) {
-            getCategory(game.players.get(game.playersTurn).getPlayersHand().get(choice-1));
+        if (choice != 0) {
+            if (!game.categoryIsSelected || game.players.get(game.playersTurn).getPlayersHand().get((choice - 1)).getCardType().equals("trump")) {
+                setCategory(game.players.get(game.playersTurn).getPlayersHand().get(choice - 1));
 
+            }
         }
         return choice;
     }
@@ -137,42 +139,65 @@ public class Main {
 
     }
 
-    public static void getCategory(Card playersChosenCard) {
-        int selection = 0;
-
+    public static void setCategory(Card playersChosenCard) {
+        int selection;
         if (playersChosenCard.getCardType().equals("trump")) {
             String subtitle = playersChosenCard.getSubtitle();
-            game.cardCategory = subtitle.toLowerCase();
 
-        } else {
-
-            do {
-                try {
-                    Scanner userInput = new Scanner(System.in);
-                    System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
-                            " 4 - Crustal Abundance \n 5 - Economic Value");
-                    System.out.print(">>>");
-                    selection = userInput.nextInt();
-                } catch (InputMismatchException e) {
-                    System.out.println("Selection is invalid");
-                }
-            } while (selection < 1 || selection > 5);
-
-            if (selection == 1) {
-                game.cardCategory = "hardness";
-            } else if (selection == 2) {
-                game.cardCategory = "specific gravity";
-            } else if (selection == 3) {
-                game.cardCategory = "cleavage";
-            } else if (selection == 4) {
-                game.cardCategory = "crustal abundance";
-            } else if (selection == 5) {
-                game.cardCategory = "economic value";
+            switch (subtitle) {
+                case "Hardness":
+                    selection = 1;
+                    break;
+                case "Specific gravity":
+                    selection = 2;
+                    break;
+                case "Cleavage":
+                    selection = 3;
+                    break;
+                case "Crustal abundance":
+                    selection = 4;
+                    break;
+                case "Economic value":
+                    selection = 5;
+                    break;
+                default:
+                    selection = getCategory();
             }
+        } else {
+            selection = getCategory();
+        }
+
+        if (selection == 1) {
+            game.cardCategory = "hardness";
+        } else if (selection == 2) {
+            game.cardCategory = "specific gravity";
+        } else if (selection == 3) {
+            game.cardCategory = "cleavage";
+        } else if (selection == 4) {
+            game.cardCategory = "crustal abundance";
+        } else if (selection == 5) {
+            game.cardCategory = "economic value";
         }
         game.categoryIsSelected = true;
         game.newCategorySelected = true;
         game.resetPlayersPassed();
+
+    }
+
+    public static int getCategory() {
+        int selection = 0;
+        do {
+            try {
+                Scanner userInput = new Scanner(System.in);
+                System.out.println("Please select the category \n 1 - Hardness \n 2 - Specific Gravity \n 3 - Cleavage \n" +
+                        " 4 - Crustal Abundance \n 5 - Economic Value");
+                System.out.print(">>>");
+                selection = userInput.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Selection is invalid");
+            }
+        } while (selection < 1 || selection > 5);
+        return selection;
     }
 
     public static void displayRules() {
