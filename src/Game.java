@@ -443,7 +443,7 @@ public class Game {
             Card secondLastCardPlayed = playedDeck.deck.get(playedDeck.getDeckSize() - 2);
 
             return lastCardPlayed.getTitle().equals("Magnetite") && secondLastCardPlayed.getTitle().equals("The Geophysicist");
-        } catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
     }
@@ -527,11 +527,11 @@ public class Game {
     }
 
     //returns the winning players in order from 1st to last
-    public StringBuilder displayWinners(){
+    public StringBuilder displayWinners() {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("The winner ");
-        for (Player player: winningPlayers) {
+        for (Player player : winningPlayers) {
             stringBuilder.append("is: ");
             stringBuilder.append(player.getName());
             stringBuilder.append("\n");

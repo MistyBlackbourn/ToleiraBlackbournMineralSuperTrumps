@@ -37,39 +37,44 @@ public class Main {
                 game.dealCards();
                 while (game.players.size() > 1) {
                     game.validPlayer();
-                    System.out.println(game.players.get(game.playersTurn).getName());
+                    if (!game.players.get(game.playersTurn).getPassed()) {
+                        System.out.println(game.players.get(game.playersTurn).getName());
 
-                    System.out.println(game.getPlayerCards(game.players.get(game.playersTurn).getPlayersHand()));
-                    validCard = false;
-                    while (!validCard) {
-                        cardChoice = getCardSelection();
-                        if (cardChoice == 0) {
-                            System.out.println("Chose to pass, draw a card");
-                            game.drawCard();
-                            validCard = true;
-                            if (game.playersPassed()) {
-                                game.categoryIsSelected = false;
+                        System.out.println(game.getPlayerCards(game.players.get(game.playersTurn).getPlayersHand()));
+                        validCard = false;
+                        while (!validCard) {
+                            cardChoice = getCardSelection();
+                            if (cardChoice == 0) {
+                                System.out.println("Chose to pass, draw a card");
+                                game.drawCard();
+                                validCard = true;
+                                if (game.playersPassed()) {
+                                    game.categoryIsSelected = false;
+                                }
+                            } else {
+                                validCard = game.checkCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1));
+                                if (!validCard) {
+                                    System.out.println("You can't play that card, please select another");
+                                } else {
+                                    game.playCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1), cardChoice - 1);
+                                    game.newCategorySelected = false;
+                                    System.out.println(game.playerSelection());
+                                }
+                            }
+                        }
+                        if (game.players.get(game.playersTurn).getHandSize() == 0) {
+                            game.winningPlayer();
+
+                        }
+                        if (game.playedDeck.getDeckSize() != 0) {
+                            if (!game.getLastCardPlayed().getCardType().equals("trump") && !game.specialRoundWinningCondition()) {
+                                game.nextPlayer();
                             }
                         } else {
-                            validCard = game.checkCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1));
-                            if (!validCard) {
-                                System.out.println("You can't play that card, please select another");
-                            } else {
-                                game.playCard(game.players.get(game.playersTurn).getPlayersHand().get(cardChoice - 1), cardChoice - 1);
-                                game.newCategorySelected = false;
-                                System.out.println(game.playerSelection());
-                            }
-                        }
-                    }
-                    if (game.players.get(game.playersTurn).getHandSize() == 0) {
-                        game.winningPlayer();
-
-                    }
-                    if (game.playedDeck.getDeckSize() != 0) {
-                        if (!game.getLastCardPlayed().getCardType().equals("trump") && !game.specialRoundWinningCondition()) {
                             game.nextPlayer();
                         }
-                    } else {
+                    }
+                    else {
                         game.nextPlayer();
                     }
                 }
@@ -161,7 +166,7 @@ public class Main {
 
     //depending on the card played, the category will be selected or will call getCategory so a category can be selected
     //it is set so that the category is currently selected and that a new category has just been selected
-    //all players that had passed are not set to not passed
+    //all players that had passed are now set to not passed
     public static void setCategory(Card playersChosenCard) {
         int selection;
         if (playersChosenCard.getCardType().equals("trump")) {
