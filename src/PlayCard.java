@@ -27,82 +27,52 @@ public class PlayCard extends Card {
         this.economicValue = economicValue;
     }
 
-    //setters
-
-    public void setChemistry(String newChemistry) {
-        this.chemistry = newChemistry;
-    }
-
-    public void setClassification(String newClassification) {
-        this.classification = newClassification;
-    }
-
-    public void setCrystalSystem(String newCrystalSystem) {
-        this.crystalSystem = newCrystalSystem;
-    }
-
-    public void setHardness(String newHardness) {
-        this.hardness = newHardness;
-    }
-
-    public void setSpecificGravity(String newSpecificGravity) {
-        this.specificGravity = newSpecificGravity;
-    }
-
-    public void setCleavage(String newCleavage) {
-        this.cleavage = newCleavage;
-    }
-
-    public void setCrustalAbundance(String newCrustalAbundance) {
-        this.crustalAbundance = newCrustalAbundance;
-    }
-
-    public void setEconomicValue(String newEconomicValue) {
-        this.economicValue = newEconomicValue;
-    }
-
-    public void setOccurrence(NSArray newOccurrence) {
-        this.occurrence = newOccurrence;
-    }
-
-    //getters
-
+    //returns the chemistry
     public String getChemistry() {
         return this.chemistry;
     }
 
+    //returns the classification
     public String getClassification() {
         return this.classification;
     }
 
+    //returns the crystal system
     public String getCrystalSystem() {
         return this.crystalSystem;
     }
 
+    //returns the hardness
     public String getHardness() {
         return this.hardness;
     }
 
+    //returns the specific gravity
     public String getSpecificGravity() {
         return this.specificGravity;
     }
 
+    //returns the cleavage
     public String getCleavage() {
         return this.cleavage;
     }
 
+    //returns the crustal abundance
     public String getCrustalAbundance() {
         return this.crustalAbundance;
     }
 
+    //returns the economic value
     public String getEconomicValue() {
         return this.economicValue;
     }
 
+    //returns an array of the occurrences
     public NSArray getOccurrence() {
         return this.occurrence;
     }
 
+    //returns null
     public String getSubtitle() {
         return null;
     }

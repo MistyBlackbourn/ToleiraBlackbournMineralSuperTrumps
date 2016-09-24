@@ -9,21 +9,16 @@ public abstract class Card {
         this.title = title;
     }
 
+    //returns the card type
     public String getCardType() {
         return cardType;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-
+    //returns the cards title
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public abstract String getSubtitle();
 

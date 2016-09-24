@@ -11,16 +11,7 @@ public class Player {
 
     }
 
-    //setters
-
-    public void setPlayersHand(ArrayList<Card> newPlayersHand) {
-        this.playersHand = newPlayersHand;
-    }
-
-    public void setPlayerName(String newPlayerName) {
-        this.playerName = newPlayerName;
-    }
-
+    //increments or decrements the hand size depending on the control
     public void setHandSize(boolean control) {
         if (control) {
             ++handSize;
@@ -29,24 +20,27 @@ public class Player {
         }
     }
 
+    //set whether the player has passed this round or not
     public void setPassed(boolean passed){
         this.passed = passed;
     }
 
-    //getters
-
+    //returns the cards the player has in their hand
     public ArrayList<Card> getPlayersHand() {
         return this.playersHand;
     }
 
+    //return the players name
     public String getName() {
         return this.playerName;
     }
 
+    //returns the hand size
     public int getHandSize() {
         return this.handSize;
     }
 
+    //returns whether the player has passed or not
     public boolean getPassed(){
         return this.passed;
     }

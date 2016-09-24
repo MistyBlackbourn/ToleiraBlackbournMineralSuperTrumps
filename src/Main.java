@@ -4,6 +4,16 @@ import java.util.Scanner;
 public class Main {
     static Game game = new Game();
 
+    //displays the menu, if they choose to play game begins, if they choose to see the rules, they are displayed otherwise, program quits
+    //gets the number of players then creates the players, creates the cards, shuffles the deck then deals.
+    //game plays in the following order until all but one player has emptied their hand:
+    //checks player is valid and has not passed
+    //display players cards
+    //asks for a selection
+    //checks/gets the category
+    //validates card
+    //checks if they've won
+    //moves to next player
     public static void main(String[] args) {
         int cardChoice;
         boolean validCard;
@@ -56,11 +66,15 @@ public class Main {
 
                     }
                     if (game.playedDeck.getDeckSize() != 0) {
-                        if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                        if (!game.getLastCardPlayed().getCardType().equals("trump") && !game.specialRoundWinningCondition()) {
                             game.nextPlayer();
                         }
+                    } else {
+                        game.nextPlayer();
                     }
                 }
+                System.out.println(game.displayWinners());
+
             } else if (menuSelection == 2) {
                 displayRules();
 
@@ -69,6 +83,8 @@ public class Main {
         System.out.println("Thanks for playing!");
     }
 
+    //user enters a number to select which card they would like to play
+    //then they may or may not be asked to select a category depending on their selection or if a category is not already selected
     public static int getCardSelection() {
         int choice = 0;
         do {
@@ -94,6 +110,7 @@ public class Main {
         return choice;
     }
 
+    //user enters a number to make a menu selection
     public static int getMenuSelection() {
         int input = 0;
         do {
@@ -109,6 +126,8 @@ public class Main {
         return input;
     }
 
+    //user enters how many players will be playing
+    //they must select between 3 and 5 inclusive
     public static int getPlayers() {
         Scanner userInput = new Scanner(System.in);
         int numberPlayers = 0;
@@ -126,6 +145,7 @@ public class Main {
         return numberPlayers;
     }
 
+    //user enters their name
     public static void getPlayersNames(int numberPlayers) {
         String playerName;
         Scanner userInput = new Scanner(System.in);
@@ -139,6 +159,9 @@ public class Main {
 
     }
 
+    //depending on the card played, the category will be selected or will call getCategory so a category can be selected
+    //it is set so that the category is currently selected and that a new category has just been selected
+    //all players that had passed are not set to not passed
     public static void setCategory(Card playersChosenCard) {
         int selection;
         if (playersChosenCard.getCardType().equals("trump")) {
@@ -184,6 +207,7 @@ public class Main {
 
     }
 
+    //user is asked to select a category
     public static int getCategory() {
         int selection = 0;
         do {
@@ -200,6 +224,7 @@ public class Main {
         return selection;
     }
 
+    //displays the game rules
     public static void displayRules() {
         System.out.println(game.getRules());
     }

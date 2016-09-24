@@ -1,9 +1,7 @@
 import com.dd.plist.*;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -439,6 +437,17 @@ public class Game {
         return economicValueValue;
     }
 
+    public boolean specialRoundWinningCondition() {
+        try {
+            Card lastCardPlayed = getLastCardPlayed();
+            Card secondLastCardPlayed = playedDeck.deck.get(playedDeck.getDeckSize() - 2);
+
+            return lastCardPlayed.getTitle().equals("Magnetite") && secondLastCardPlayed.getTitle().equals("The Geophysicist");
+        } catch(ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+    }
+
     //checks whether the card that has been selected can validly be played
     //if the deck is currently empty, the category has just been changed, or this card or the last card is a trump card, the card is automatically valid
     //each time a card is checked, it is based on the category that is currently selected
@@ -449,6 +458,7 @@ public class Game {
         } else {
             lastCardPlayed = getLastCardPlayed();
         }
+
 
         if (selectedCard.getCardType().equals("trump") || lastCardPlayed.getCardType().equals("trump")) {
             return true;
@@ -514,6 +524,25 @@ public class Game {
     //returns the card that was last played
     public Card getLastCardPlayed() {
         return playedDeck.deck.get(playedDeck.getDeckSize() - 1);
+    }
+
+    //returns the winning players in order from 1st to last
+    public StringBuilder displayWinners(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("The winner ");
+        for (Player player: winningPlayers) {
+            stringBuilder.append("is: ");
+            stringBuilder.append(player.getName());
+            stringBuilder.append("\n");
+            stringBuilder.append("Following ");
+        }
+
+        stringBuilder.append("Last is: ");
+        stringBuilder.append(players.get(0).getName());
+        stringBuilder.append("\n");
+
+        return stringBuilder;
     }
 
 }
