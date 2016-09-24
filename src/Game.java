@@ -273,7 +273,7 @@ public class Game {
 
     public int getCrustalAbundanceValue(Card card) {
         int crustalAbundanceValue = 0;
-        switch (card.getCleavage()) {
+        switch (card.getCrustalAbundance()) {
             case "ultratrace":
                 crustalAbundanceValue = 1;
                 break;
@@ -298,7 +298,7 @@ public class Game {
 
     public int getEconomicValueValue(Card card) {
         int economicValueValue = 0;
-        switch (card.getCleavage()) {
+        switch (card.getEconomicValue()) {
             case "trivial":
                 economicValueValue = 1;
                 break;
