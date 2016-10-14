@@ -91,7 +91,7 @@ public class Main {
     //user enters a number to select which card they would like to play
     //then they may or may not be asked to select a category depending on their selection or if a category is not already selected
     public static int getCardSelection() {
-        int choice = 0;
+        int choice;
         do {
             try {
                 System.out.println("Please enter the number for the corresponding card");
@@ -104,6 +104,7 @@ public class Main {
 
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number");
+                choice = -1;
             }
         } while (choice > game.players.get(game.playersTurn).getHandSize() || choice < 0);
         if (choice != 0) {
@@ -134,11 +135,10 @@ public class Main {
     //user enters how many players will be playing
     //they must select between 3 and 5 inclusive
     public static int getPlayers() {
-        Scanner userInput = new Scanner(System.in);
         int numberPlayers = 0;
         do {
             try {
-
+                Scanner userInput = new Scanner(System.in);
                 System.out.println("There must be at least 3 players and at most 5 players.");
                 System.out.print("Please enter the number of players: ");
                 numberPlayers = userInput.nextInt();

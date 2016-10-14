@@ -1,5 +1,4 @@
 import com.dd.plist.NSArray;
-import com.dd.plist.NSObject;
 
 public class TrumpCard extends Card {
     private String subtitle;
