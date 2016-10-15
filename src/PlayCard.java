@@ -12,9 +12,9 @@ public class PlayCard extends Card {
     private String economicValue;
 
 
-    PlayCard(String title, String cardType, String chemistry, String classification, String crystalSystem, NSArray occurrence,
+    PlayCard(String title, String cardType, String fileName, String chemistry, String classification, String crystalSystem, NSArray occurrence,
              String hardness, String specificGravity, String cleavage, String crustalAbundance, String economicValue) {
-        super(cardType, title);
+        super(cardType, title, fileName);
         this.chemistry = chemistry;
         this.classification = classification;
         this.crystalSystem = crystalSystem;

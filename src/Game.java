@@ -33,13 +33,13 @@ public class Game {
             for (NSObject card : cards) {
                 NSDictionary cardDictionary = (NSDictionary) card;
                 if (cardDictionary.containsValue("play")) {
-                    new_card = new PlayCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("chemistry").toString(), cardDictionary.objectForKey("classification").toString(), cardDictionary.objectForKey("crystal_system").toString(), (NSArray) cardDictionary.objectForKey("occurrence"), cardDictionary.objectForKey("hardness").toString(), cardDictionary.objectForKey("specific_gravity").toString(), cardDictionary.objectForKey("cleavage").toString(), cardDictionary.objectForKey("crustal_abundance").toString(), cardDictionary.objectForKey("economic_value").toString());
+                    new_card = new PlayCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("fileName").toString(), cardDictionary.objectForKey("chemistry").toString(), cardDictionary.objectForKey("classification").toString(), cardDictionary.objectForKey("crystal_system").toString(), (NSArray) cardDictionary.objectForKey("occurrence"), cardDictionary.objectForKey("hardness").toString(), cardDictionary.objectForKey("specific_gravity").toString(), cardDictionary.objectForKey("cleavage").toString(), cardDictionary.objectForKey("crustal_abundance").toString(), cardDictionary.objectForKey("economic_value").toString());
                     cardDeck.addCard(new_card);
                 } else if (cardDictionary.containsValue("trump")) {
-                    new_card = new TrumpCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("subtitle").toString());
+                    new_card = new TrumpCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("fileName").toString(), cardDictionary.objectForKey("subtitle").toString());
                     cardDeck.addCard(new_card);
                 } else if (cardDictionary.containsValue("rule")) {
-                    new_card = new RuleCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("subtitle").toString());
+                    new_card = new RuleCard(cardDictionary.objectForKey("title").toString(), cardDictionary.objectForKey("card_type").toString(), cardDictionary.objectForKey("fileName").toString(), cardDictionary.objectForKey("subtitle").toString());
                     ruleDeck.addCard(new_card);
                 } else {
                     System.out.println("Problem with Card");

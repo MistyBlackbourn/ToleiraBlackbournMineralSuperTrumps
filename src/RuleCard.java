@@ -4,8 +4,8 @@ public class RuleCard extends Card {
     private String subtitle;
 
 
-    RuleCard(String title, String cardType, String subtitle) {
-        super(cardType, title);
+    RuleCard(String title, String cardType, String fileName, String subtitle) {
+        super(cardType, title, fileName);
         this.subtitle = subtitle;
     }
 

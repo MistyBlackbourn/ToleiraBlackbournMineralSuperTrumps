@@ -3,10 +3,12 @@ import com.dd.plist.NSArray;
 public abstract class Card {
     private String cardType;
     private String title;
+    private String fileName;
 
-    Card(String cardType, String title) {
+    Card(String cardType, String title, String fileName) {
         this.cardType = cardType;
         this.title = title;
+        this.fileName = fileName;
     }
 
     //returns the card type
@@ -17,6 +19,11 @@ public abstract class Card {
     //returns the cards title
     public String getTitle() {
         return title;
+    }
+
+    //return the fileName of the image for the card
+    public String getFileName() {
+        return fileName;
     }
 
 
