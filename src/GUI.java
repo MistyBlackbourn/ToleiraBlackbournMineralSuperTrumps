@@ -28,13 +28,12 @@ public class GUI extends JFrame implements ActionListener{
     JButton play = new JButton("Play");
     JButton rules = new JButton("Rules");
     JButton quit = new JButton("Quit");
+    JButton returnButton = new JButton("Return");
+    JButton ruleCardButton;
 
     //panel3
     JPanel panel3 = new JPanel();
     JLabel statusLabel = new JLabel("Status/Errors");
-
-
-
 
     GUI(){
         super();
@@ -67,35 +66,28 @@ public class GUI extends JFrame implements ActionListener{
 
         panel3.add(statusLabel);
 
-
         super.add(panel1, BorderLayout.NORTH);
         super.add(panel2);
         super.add(panel3, BorderLayout.SOUTH);
+
+        quit.addActionListener(this);
         rules.addActionListener(this);
     }
 
     public static void main(String[] args) {
-
-
         game.createCards();
-
         GUI frame = new GUI();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setSize(1350, 650);
-
-        //Adds Card Temporarily
-//        JButton card;
-//        card = addCards();
-//        panel2.add(card);
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
-    public static JButton addCards() {
+    public static JButton createCardButton(String filePath, int width, int height) {
         try {
-            BufferedImage image = ImageIO.read(new File("images/Slide01.jpg"));
-            Image image1 = image.getScaledInstance(122, 171, Image.SCALE_SMOOTH);
+            BufferedImage image = ImageIO.read(new File(filePath));
+            Image image1 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             Icon icon = new ImageIcon(image1);
             JButton card = new JButton(icon);
             return card;
@@ -108,8 +100,34 @@ public class GUI extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
+
         if (source == rules){
-            System.out.println(game.getRules());
+            panel2.removeAll();
+            for (Card ruleCard:game.ruleDeck.deck) {
+                ruleCardButton = createCardButton("images/" + ruleCard.getFileName(), 330, 465);
+                panel2.add(ruleCardButton);
+
+            }
+
+            panel2.add(returnButton);
+            returnButton.addActionListener(this);
+            panel2.setLayout(new GridLayout(1,4));
+            validate();
+            repaint();
+        } else if (source == returnButton){
+            panel2.removeAll();
+            panel2.add(play);
+            panel2.add(rules);
+            panel2.add(quit);
+            panel2.setLayout(new GridLayout(2,8));
+            validate();
+            repaint();
+        } else if (source == quit){
+            System.exit(0);
+        } else if (source == play){
+
+            game.shuffleDeck();
+            game.dealCards();
 
         }
     }
