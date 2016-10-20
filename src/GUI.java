@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,12 +14,8 @@ public class GUI {
         game.createCards();
 
         JFrame frame = new JFrame();
-        FlowLayout flow = new FlowLayout();
-        BorderLayout borderLayout = new BorderLayout();
-        frame.setLayout(flow);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setSize(1350, 650);
-
 
         //panel1
         JPanel panel1 = new JPanel();
@@ -62,47 +59,21 @@ public class GUI {
 
         //panel2
         JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayout(2, 8));
+        panel2.setLayout(new GridLayout(2,8));
 
         //panel3
         JPanel panel3 = new JPanel();
-        panel3.setLayout(borderLayout);
         JLabel statusLabel = new JLabel("Status/Errors");
-        panel3.add(statusLabel, BorderLayout.SOUTH);
-
+        panel3.add(statusLabel);
 
         //Adds Card Temporarily
         JButton card;
         card = addCards();
         panel2.add(card);
-        JButton card2;
-        card2 = addCards();
-        panel2.add(card2);
-        JButton card3;
-        card3 = addCards();
-        panel2.add(card3);
-        JButton card4;
-        card4 = addCards();
-        panel2.add(card4);
-        JButton card5;
-        card5 = addCards();
-        panel2.add(card5);
-        JButton card6;
-        card6 = addCards();
-        panel2.add(card6);
-        JButton card7;
-        card7 = addCards();
-        panel2.add(card7);
-        JButton card8;
-        card8 = addCards();
-        panel2.add(card8);
-        JButton card9;
-        card9 = addCards();
-        panel2.add(card9);
 
-        frame.add(panel1);
+        frame.add(panel1, BorderLayout.NORTH);
         frame.add(panel2);
-        frame.add(panel3);
+        frame.add(panel3, BorderLayout.SOUTH);
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
