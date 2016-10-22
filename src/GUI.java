@@ -209,9 +209,6 @@ public class GUI extends JFrame implements ActionListener {
             validate();
             repaint();
         } else if (source == play) {
-            //boolean validCard;
-            //int cardChoice;
-
             panel2.removeAll();
             panel2.add(threePlayers);
             panel2.add(fourPlayers);
@@ -221,32 +218,36 @@ public class GUI extends JFrame implements ActionListener {
 
         } else if (source == beginButton) {
             panel2.removeAll();
-            while (game.players.size() > 1) {
-                game.validPlayer();
-                if (!game.players.get(game.playersTurn).getPassed()) {
-                    nameLabel.setText(game.players.get(game.playersTurn).getName());
-                    for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
-                        playerCardButton = createCardButton("images/" + playersCard.getFileName(), 122, 172);
-                        panel2.add(playerCardButton);
-                        playerCardButton.setName(playersCard.getTitle());
-                        playerCardButton.setActionCommand("cardSelected");
-                        playerCardButton.addActionListener(this);
-
-                    }
-                    panel2.add(passButton);
+            game.validPlayer();
+            if (!game.players.get(game.playersTurn).getPassed()) {
+                nameLabel.setText(game.players.get(game.playersTurn).getName());
+                for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
+                    playerCardButton = createCardButton("images/" + playersCard.getFileName(), 134, 189);
+                    panel2.add(playerCardButton);
+                    playerCardButton.setName(playersCard.getTitle());
+                    playerCardButton.setActionCommand("cardSelected");
+                    playerCardButton.addActionListener(this);
 
                 }
-                break;
+                panel2.add(passButton);
+
             }
+
             validate();
             repaint();
-            System.out.println(game.displayWinners());
+
         } else if (source == passButton) {
             statusLabel.setText("You chose to pass and drew a card");
             game.drawCard();
             if (game.playersPassed()) {
                 game.categoryIsSelected = false;
             }
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
         } else if (event.getActionCommand().equals("cardSelected")) {
             for (int i = 0; i < game.players.get(game.playersTurn).getPlayersHand().size(); ++i) {
                 System.out.println(((JComponent) event.getSource()).getName());
@@ -256,69 +257,93 @@ public class GUI extends JFrame implements ActionListener {
                     System.out.println(validCard);
                     if (!validCard) {
                         statusLabel.setText("You can't play that card, please select another");
+                        repaint();
                     } else {
+                        topCardPanel.remove(playedCard);
+                        playedCard = createCardButton("images/" + selectedCard.getFileName(), 111, 156);
+                        topCardPanel.add(playedCard);
+                        validate();
+                        repaint();
                         game.newCategorySelected = false;
-                    }
-                    if (!game.categoryIsSelected) {
-                        if (selectedCard.getCardType().equals("trump")) {
-                            game.cardCategory = selectedCard.getSubtitle().toLowerCase();
-                            repaint();
+                        if (!game.categoryIsSelected) {
+                            if (selectedCard.getCardType().equals("trump")) {
+                                game.cardCategory = selectedCard.getSubtitle().toLowerCase();
+                                repaint();
+                            } else {
+                                panel2.removeAll();
+                                panel2.add(hardness);
+                                panel2.add(specificGravity);
+                                panel2.add(cleavage);
+                                panel2.add(crustalAbundance);
+                                panel2.add(economicValue);
+                                validate();
+                                repaint();
+
+                            }
+                            game.playCard(selectedCard, i);
+                            game.categoryIsSelected = true;
+                            game.newCategorySelected = true;
+                            game.resetPlayersPassed();
                         } else {
+                            game.playCard(selectedCard, i);
+                            cardDetailsLabel.setText(game.playerSelection().toString());
+                            game.nextPlayer();
                             panel2.removeAll();
-                            panel2.add(hardness);
-                            panel2.add(specificGravity);
-                            panel2.add(cleavage);
-                            panel2.add(crustalAbundance);
-                            panel2.add(economicValue);
+                            beginButton.setText("Next Player");
+                            panel2.add(beginButton);
                             validate();
                             repaint();
-
                         }
-                        game.categoryIsSelected = true;
-                        game.newCategorySelected = true;
-                        game.resetPlayersPassed();
                     }
-                    topCardPanel.remove(playedCard);
-                    playedCard = createCardButton("images/" + selectedCard.getFileName(), 111, 156);
-                    topCardPanel.add(playedCard);
-                    validate();
-                    repaint();
-                    game.playCard(selectedCard, i);
+                    game.newCategorySelected = false;
                 }
             }
 
-        } else if (source == hardness){
+        } else if (source == hardness) {
             game.cardCategory = "hardness";
-            panel2.removeAll();
-            panel2.add(nextPlayerButton);
-            validate();
-            repaint();
-        } else if (source == specificGravity){
-            game.cardCategory = "specific gravity";
-            panel2.removeAll();
-            panel2.add(nextPlayerButton);
-            validate();
-            repaint();
-        } else if (source == crustalAbundance){
-            game.cardCategory = "crustal abundance";
-            panel2.removeAll();
-            panel2.add(nextPlayerButton);
-            validate();
-            repaint();
-        } else if (source == cleavage){
-            game.cardCategory = "cleavage";
-            panel2.removeAll();
-            panel2.add(nextPlayerButton);
-            validate();
-            repaint();
-        } else if (source == economicValue){
-            game.cardCategory = "economic value";
-            panel2.removeAll();
-            panel2.add(nextPlayerButton);
-            validate();
-            repaint();
-        } else if (source == nextPlayerButton){
             cardDetailsLabel.setText(game.playerSelection().toString());
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
+        } else if (source == specificGravity) {
+            game.cardCategory = "specific gravity";
+            cardDetailsLabel.setText(game.playerSelection().toString());
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
+        } else if (source == crustalAbundance) {
+            game.cardCategory = "crustal abundance";
+            cardDetailsLabel.setText(game.playerSelection().toString());
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
+        } else if (source == cleavage) {
+            game.cardCategory = "cleavage";
+            cardDetailsLabel.setText(game.playerSelection().toString());
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
+        } else if (source == economicValue) {
+            game.cardCategory = "economic value";
+            cardDetailsLabel.setText(game.playerSelection().toString());
+            game.nextPlayer();
+            panel2.removeAll();
+            beginButton.setText("Next Player");
+            panel2.add(beginButton);
+            validate();
+            repaint();
         }
     }
 }
