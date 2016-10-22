@@ -16,9 +16,7 @@ public class GUI extends JFrame implements ActionListener {
     JLabel topCard = new JLabel("Top Card of the Deck");
     JButton playedCard = new JButton();
     JPanel cardDetailsPanel = new JPanel();
-    JLabel cardName = new JLabel("Card Name,");
-    JLabel currentCategory = new JLabel("Category,");
-    JLabel currentValue = new JLabel("Value");
+    JLabel cardDetailsLabel = new JLabel("Card Name, Category, Value");
     JPanel playerPanel = new JPanel();
     JLabel playersTurn = new JLabel("Players Turn:");
     JLabel nameLabel = new JLabel("Players Name");
@@ -47,6 +45,7 @@ public class GUI extends JFrame implements ActionListener {
     JButton cleavage = new JButton("Cleavage");
     JButton crustalAbundance = new JButton("Crustal Abundance");
     JButton economicValue = new JButton("Economic Value");
+    JButton nextPlayerButton = new JButton("Next Player");
     int numberPlayers = 0;
 
     //panel3
@@ -68,9 +67,7 @@ public class GUI extends JFrame implements ActionListener {
         }
         topCardPanel.add(playedCard);
         panel1.add(topCardPanel);
-        cardDetailsPanel.add(cardName);
-        cardDetailsPanel.add(currentCategory);
-        cardDetailsPanel.add(currentValue);
+        cardDetailsPanel.add(cardDetailsLabel);
         panel1.add(cardDetailsPanel);
         playerPanel.add(playersTurn);
         playerPanel.add(nameLabel);
@@ -97,7 +94,12 @@ public class GUI extends JFrame implements ActionListener {
         confirmPlayersNames.addActionListener(this);
         beginButton.addActionListener(this);
         passButton.addActionListener(this);
-        //playerCardButton.addActionListener(this);
+        hardness.addActionListener(this);
+        specificGravity.addActionListener(this);
+        crustalAbundance.addActionListener(this);
+        cleavage.addActionListener(this);
+        economicValue.addActionListener(this);
+        nextPlayerButton.addActionListener(this);
     }
 
     public static void main(String[] args) {
@@ -255,14 +257,11 @@ public class GUI extends JFrame implements ActionListener {
                     if (!validCard) {
                         statusLabel.setText("You can't play that card, please select another");
                     } else {
-                        cardName.setText(selectedCard.getTitle() + ", ");
-
                         game.newCategorySelected = false;
                     }
                     if (!game.categoryIsSelected) {
                         if (selectedCard.getCardType().equals("trump")) {
                             game.cardCategory = selectedCard.getSubtitle().toLowerCase();
-                            currentCategory.setText(selectedCard.getSubtitle() + ", ");
                             repaint();
                         } else {
                             panel2.removeAll();
@@ -279,10 +278,47 @@ public class GUI extends JFrame implements ActionListener {
                         game.newCategorySelected = true;
                         game.resetPlayersPassed();
                     }
+                    topCardPanel.remove(playedCard);
+                    playedCard = createCardButton("images/" + selectedCard.getFileName(), 111, 156);
+                    topCardPanel.add(playedCard);
+                    validate();
+                    repaint();
                     game.playCard(selectedCard, i);
                 }
             }
 
+        } else if (source == hardness){
+            game.cardCategory = "hardness";
+            panel2.removeAll();
+            panel2.add(nextPlayerButton);
+            validate();
+            repaint();
+        } else if (source == specificGravity){
+            game.cardCategory = "specific gravity";
+            panel2.removeAll();
+            panel2.add(nextPlayerButton);
+            validate();
+            repaint();
+        } else if (source == crustalAbundance){
+            game.cardCategory = "crustal abundance";
+            panel2.removeAll();
+            panel2.add(nextPlayerButton);
+            validate();
+            repaint();
+        } else if (source == cleavage){
+            game.cardCategory = "cleavage";
+            panel2.removeAll();
+            panel2.add(nextPlayerButton);
+            validate();
+            repaint();
+        } else if (source == economicValue){
+            game.cardCategory = "economic value";
+            panel2.removeAll();
+            panel2.add(nextPlayerButton);
+            validate();
+            repaint();
+        } else if (source == nextPlayerButton){
+            cardDetailsLabel.setText(game.playerSelection().toString());
         }
     }
 }
