@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class GUI extends JFrame implements ActionListener{
+public class GUI extends JFrame implements ActionListener {
     static Game game = new Game();
     //panel1
     JPanel panel1 = new JPanel();
@@ -28,19 +28,37 @@ public class GUI extends JFrame implements ActionListener{
     JButton play = new JButton("Play");
     JButton rules = new JButton("Rules");
     JButton quit = new JButton("Quit");
+    JButton threePlayers = new JButton("Three Players");
+    JButton fourPlayers = new JButton("Four Players");
+    JButton fivePlayers = new JButton("Five Players");
+    JTextField playersName1 = new JTextField("Player 1");
+    JTextField playersName2 = new JTextField("Player 2");
+    JTextField playersName3 = new JTextField("Player 3");
+    JTextField playersName4 = new JTextField("Player 4");
+    JTextField playersName5 = new JTextField("Player 5");
     JButton returnButton = new JButton("Return");
+    JButton confirmPlayersNames = new JButton("Confirm Names");
     JButton ruleCardButton;
+    JButton playerCardButton = new JButton("Player Card");
+    JButton beginButton = new JButton("Begin");
+    JButton passButton = new JButton("Pass");
+    JButton hardness = new JButton("Hardness");
+    JButton specificGravity = new JButton("Specific Gravity");
+    JButton cleavage = new JButton("Cleavage");
+    JButton crustalAbundance = new JButton("Crustal Abundance");
+    JButton economicValue = new JButton("Economic Value");
+    int numberPlayers = 0;
 
     //panel3
     JPanel panel3 = new JPanel();
     JLabel statusLabel = new JLabel("Status/Errors");
 
-    GUI(){
+    GUI() {
         super();
         panel1.setLayout(new GridLayout());
         topCardPanel.add(topCard);
         try {
-            BufferedImage image = ImageIO.read(new File("images/Slide01.jpg"));
+            BufferedImage image = ImageIO.read(new File("images/Slide65.jpg"));
             Image image1 = image.getScaledInstance(111, 156, Image.SCALE_SMOOTH);
             Icon icon = new ImageIcon(image1);
             playedCard = new JButton(icon);
@@ -59,7 +77,7 @@ public class GUI extends JFrame implements ActionListener{
         panel1.add(playerPanel);
 
 
-        panel2.setLayout(new GridLayout(2,8));
+        panel2.setLayout(new GridLayout(2, 8));
         panel2.add(play);
         panel2.add(rules);
         panel2.add(quit);
@@ -72,6 +90,14 @@ public class GUI extends JFrame implements ActionListener{
 
         quit.addActionListener(this);
         rules.addActionListener(this);
+        play.addActionListener(this);
+        threePlayers.addActionListener(this);
+        fourPlayers.addActionListener(this);
+        fivePlayers.addActionListener(this);
+        confirmPlayersNames.addActionListener(this);
+        beginButton.addActionListener(this);
+        passButton.addActionListener(this);
+        //playerCardButton.addActionListener(this);
     }
 
     public static void main(String[] args) {
@@ -101,9 +127,10 @@ public class GUI extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
 
-        if (source == rules){
+
+        if (source == rules) {
             panel2.removeAll();
-            for (Card ruleCard:game.ruleDeck.deck) {
+            for (Card ruleCard : game.ruleDeck.deck) {
                 ruleCardButton = createCardButton("images/" + ruleCard.getFileName(), 330, 465);
                 panel2.add(ruleCardButton);
 
@@ -111,23 +138,150 @@ public class GUI extends JFrame implements ActionListener{
 
             panel2.add(returnButton);
             returnButton.addActionListener(this);
-            panel2.setLayout(new GridLayout(1,4));
+            panel2.setLayout(new GridLayout(1, 4));
             validate();
             repaint();
-        } else if (source == returnButton){
+        } else if (source == returnButton) {
             panel2.removeAll();
             panel2.add(play);
             panel2.add(rules);
             panel2.add(quit);
-            panel2.setLayout(new GridLayout(2,8));
+            panel2.setLayout(new GridLayout(2, 8));
             validate();
             repaint();
-        } else if (source == quit){
+        } else if (source == quit) {
             System.exit(0);
-        } else if (source == play){
-
+        } else if (source == confirmPlayersNames) {
+            if (numberPlayers == 3) {
+                game.createPlayers(playersName1.getText());
+                game.createPlayers(playersName2.getText());
+                game.createPlayers(playersName3.getText());
+            } else if (numberPlayers == 4) {
+                game.createPlayers(playersName1.getText());
+                game.createPlayers(playersName2.getText());
+                game.createPlayers(playersName3.getText());
+                game.createPlayers(playersName4.getText());
+            } else if (numberPlayers == 5) {
+                game.createPlayers(playersName1.getText());
+                game.createPlayers(playersName2.getText());
+                game.createPlayers(playersName3.getText());
+                game.createPlayers(playersName4.getText());
+                game.createPlayers(playersName5.getText());
+            }
             game.shuffleDeck();
             game.dealCards();
+            panel2.removeAll();
+            panel2.add(beginButton);
+            statusLabel.setText("All Cards have been shuffled and dealt. Please press button to begin");
+            validate();
+            repaint();
+
+        } else if (source == threePlayers) {
+            numberPlayers = 3;
+            panel2.removeAll();
+            panel2.add(playersName1);
+            panel2.add(playersName2);
+            panel2.add(playersName3);
+            panel2.add(confirmPlayersNames);
+            validate();
+            repaint();
+        } else if (source == fourPlayers) {
+            numberPlayers = 4;
+            panel2.removeAll();
+            panel2.add(playersName1);
+            panel2.add(playersName2);
+            panel2.add(playersName3);
+            panel2.add(playersName4);
+            panel2.add(confirmPlayersNames);
+            validate();
+            repaint();
+        } else if (source == fivePlayers) {
+            numberPlayers = 5;
+            panel2.removeAll();
+            panel2.add(playersName1);
+            panel2.add(playersName2);
+            panel2.add(playersName3);
+            panel2.add(playersName4);
+            panel2.add(playersName5);
+            panel2.add(confirmPlayersNames);
+            validate();
+            repaint();
+        } else if (source == play) {
+            //boolean validCard;
+            //int cardChoice;
+
+            panel2.removeAll();
+            panel2.add(threePlayers);
+            panel2.add(fourPlayers);
+            panel2.add(fivePlayers);
+            validate();
+            repaint();
+
+        } else if (source == beginButton) {
+            panel2.removeAll();
+            while (game.players.size() > 1) {
+                game.validPlayer();
+                if (!game.players.get(game.playersTurn).getPassed()) {
+                    nameLabel.setText(game.players.get(game.playersTurn).getName());
+                    for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
+                        playerCardButton = createCardButton("images/" + playersCard.getFileName(), 122, 172);
+                        panel2.add(playerCardButton);
+                        playerCardButton.setName(playersCard.getTitle());
+                        playerCardButton.setActionCommand("cardSelected");
+                        playerCardButton.addActionListener(this);
+
+                    }
+                    panel2.add(passButton);
+
+                }
+                break;
+            }
+            validate();
+            repaint();
+            System.out.println(game.displayWinners());
+        } else if (source == passButton) {
+            statusLabel.setText("You chose to pass and drew a card");
+            game.drawCard();
+            if (game.playersPassed()) {
+                game.categoryIsSelected = false;
+            }
+        } else if (event.getActionCommand().equals("cardSelected")) {
+            for (int i = 0; i < game.players.get(game.playersTurn).getPlayersHand().size(); ++i) {
+                System.out.println(((JComponent) event.getSource()).getName());
+                if (game.players.get(game.playersTurn).getPlayersHand().get(i).getTitle().equals(((JComponent) event.getSource()).getName())) {
+                    Card selectedCard = game.players.get(game.playersTurn).getPlayersHand().get(i);
+                    boolean validCard = game.checkCard(selectedCard);
+                    System.out.println(validCard);
+                    if (!validCard) {
+                        statusLabel.setText("You can't play that card, please select another");
+                    } else {
+                        cardName.setText(selectedCard.getTitle() + ", ");
+
+                        game.newCategorySelected = false;
+                    }
+                    if (!game.categoryIsSelected) {
+                        if (selectedCard.getCardType().equals("trump")) {
+                            game.cardCategory = selectedCard.getSubtitle().toLowerCase();
+                            currentCategory.setText(selectedCard.getSubtitle() + ", ");
+                            repaint();
+                        } else {
+                            panel2.removeAll();
+                            panel2.add(hardness);
+                            panel2.add(specificGravity);
+                            panel2.add(cleavage);
+                            panel2.add(crustalAbundance);
+                            panel2.add(economicValue);
+                            validate();
+                            repaint();
+
+                        }
+                        game.categoryIsSelected = true;
+                        game.newCategorySelected = true;
+                        game.resetPlayersPassed();
+                    }
+                    game.playCard(selectedCard, i);
+                }
+            }
 
         }
     }
