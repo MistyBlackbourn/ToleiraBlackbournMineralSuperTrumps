@@ -534,13 +534,13 @@ public class Game {
         for (Player player : winningPlayers) {
             stringBuilder.append("is: ");
             stringBuilder.append(player.getName());
-            stringBuilder.append("\n");
+            stringBuilder.append("\n ");
             stringBuilder.append("Following ");
         }
 
         stringBuilder.append("Last is: ");
         stringBuilder.append(players.get(0).getName());
-        stringBuilder.append("\n");
+        stringBuilder.append("\n ");
 
         return stringBuilder;
     }
