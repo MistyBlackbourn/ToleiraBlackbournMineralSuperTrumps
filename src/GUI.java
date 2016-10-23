@@ -141,6 +141,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(returnButton);
             returnButton.addActionListener(this);
             panel2.setLayout(new GridLayout(1, 4));
+            statusLabel.setText("Please press the return button to return to the main menu");
             validate();
             repaint();
         } else if (source == returnButton) {
@@ -149,6 +150,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(rules);
             panel2.add(quit);
             panel2.setLayout(new GridLayout(2, 8));
+            statusLabel.setText("Please make a selection");
             validate();
             repaint();
         } else if (source == quit) {
@@ -185,6 +187,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(playersName2);
             panel2.add(playersName3);
             panel2.add(confirmPlayersNames);
+            statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
         } else if (source == fourPlayers) {
@@ -195,6 +198,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(playersName3);
             panel2.add(playersName4);
             panel2.add(confirmPlayersNames);
+            statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
         } else if (source == fivePlayers) {
@@ -206,6 +210,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(playersName4);
             panel2.add(playersName5);
             panel2.add(confirmPlayersNames);
+            statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
         } else if (source == play) {
@@ -213,13 +218,25 @@ public class GUI extends JFrame implements ActionListener {
             panel2.add(threePlayers);
             panel2.add(fourPlayers);
             panel2.add(fivePlayers);
+            statusLabel.setText("Please select the number of players");
             validate();
             repaint();
 
         } else if (source == beginButton) {
             panel2.removeAll();
             game.validPlayer();
-            if (!game.players.get(game.playersTurn).getPassed()) {
+            if (game.players.get(game.playersTurn).getPassed()) {
+
+                statusLabel.setText("You've passed. Please press next player");
+                game.nextPlayer();
+                panel2.removeAll();
+                beginButton.setText("Next Player");
+                panel2.add(beginButton);
+                validate();
+                repaint();
+
+
+            } else if (!game.players.get(game.playersTurn).getPassed()) {
                 nameLabel.setText(game.players.get(game.playersTurn).getName());
                 for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
                     playerCardButton = createCardButton("images/" + playersCard.getFileName(), 134, 189);
@@ -230,11 +247,17 @@ public class GUI extends JFrame implements ActionListener {
 
                 }
                 panel2.add(passButton);
+                if (!game.categoryIsSelected) {
+                    statusLabel.setText("Please select any card, you will then also need to select a category");
+                } else {
+                    statusLabel.setText("Please select a card to play");
+                }
+
+                validate();
+                repaint();
 
             }
 
-            validate();
-            repaint();
 
         } else if (source == passButton) {
             statusLabel.setText("You chose to pass and drew a card");
@@ -246,6 +269,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         } else if (event.getActionCommand().equals("cardSelected")) {
@@ -255,6 +279,45 @@ public class GUI extends JFrame implements ActionListener {
                     Card selectedCard = game.players.get(game.playersTurn).getPlayersHand().get(i);
                     boolean validCard = game.checkCard(selectedCard);
                     System.out.println(validCard);
+                    if (selectedCard.getCardType().equals("trump")) {
+                        if (selectedCard.getTitle().equals("The Geologist")){
+                            game.categoryIsSelected = false;
+                        } else {
+                            game.cardCategory = selectedCard.getSubtitle().toLowerCase();
+                            statusLabel.setText("Category selected was " + game.cardCategory + ".");
+                            game.categoryIsSelected = true;
+                            game.newCategorySelected = true;
+                            game.resetPlayersPassed();
+                        }
+                    }
+                    if (!game.categoryIsSelected) {
+                        panel2.removeAll();
+                        panel2.add(hardness);
+                        panel2.add(specificGravity);
+                        panel2.add(cleavage);
+                        panel2.add(crustalAbundance);
+                        panel2.add(economicValue);
+                        statusLabel.setText("Please select a category");
+                        validate();
+                        repaint();
+
+
+                        game.playCard(selectedCard, i);
+                        game.categoryIsSelected = true;
+                        game.newCategorySelected = true;
+                        game.resetPlayersPassed();
+                    }
+                    else if (game.categoryIsSelected && validCard){
+                        game.playCard(selectedCard, i);
+                        cardDetailsLabel.setText(game.playerSelection().toString());
+                        game.nextPlayer();
+                        panel2.removeAll();
+                        beginButton.setText("Next Player");
+                        panel2.add(beginButton);
+                        statusLabel.setText("Press 'Next Player' to begin the next players turn");
+                        validate();
+                        repaint();
+                    }
                     if (!validCard) {
                         statusLabel.setText("You can't play that card, please select another");
                         repaint();
@@ -262,40 +325,17 @@ public class GUI extends JFrame implements ActionListener {
                         topCardPanel.remove(playedCard);
                         playedCard = createCardButton("images/" + selectedCard.getFileName(), 111, 156);
                         topCardPanel.add(playedCard);
+                        statusLabel.setText("Card played!");
                         validate();
                         repaint();
                         game.newCategorySelected = false;
-                        if (!game.categoryIsSelected) {
-                            if (selectedCard.getCardType().equals("trump")) {
-                                game.cardCategory = selectedCard.getSubtitle().toLowerCase();
-                                repaint();
-                            } else {
-                                panel2.removeAll();
-                                panel2.add(hardness);
-                                panel2.add(specificGravity);
-                                panel2.add(cleavage);
-                                panel2.add(crustalAbundance);
-                                panel2.add(economicValue);
-                                validate();
-                                repaint();
 
-                            }
-                            game.playCard(selectedCard, i);
-                            game.categoryIsSelected = true;
-                            game.newCategorySelected = true;
-                            game.resetPlayersPassed();
-                        } else {
-                            game.playCard(selectedCard, i);
-                            cardDetailsLabel.setText(game.playerSelection().toString());
-                            game.nextPlayer();
-                            panel2.removeAll();
-                            beginButton.setText("Next Player");
-                            panel2.add(beginButton);
-                            validate();
-                            repaint();
-                        }
                     }
                     game.newCategorySelected = false;
+                    if (game.players.get(game.playersTurn).getHandSize() == 0) {
+                        game.winningPlayer();
+
+                    }
                 }
             }
 
@@ -306,6 +346,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         } else if (source == specificGravity) {
@@ -315,6 +356,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         } else if (source == crustalAbundance) {
@@ -324,6 +366,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         } else if (source == cleavage) {
@@ -333,6 +376,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         } else if (source == economicValue) {
@@ -342,6 +386,7 @@ public class GUI extends JFrame implements ActionListener {
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
+            statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         }
