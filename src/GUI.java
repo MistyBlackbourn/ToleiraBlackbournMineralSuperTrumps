@@ -96,11 +96,32 @@ public class GUI extends JFrame implements ActionListener {
         confirmPlayersNames.addActionListener(this);
         beginButton.addActionListener(this);
         passButton.addActionListener(this);
+
         hardness.addActionListener(this);
+        hardness.setFont(new Font("Consolas", Font.BOLD, 30));
+        hardness.setBackground(new Color(49, 133, 157, 255));
+        hardness.setForeground(Color.WHITE);
+
         specificGravity.addActionListener(this);
+        specificGravity.setFont(new Font("Consolas", Font.BOLD, 30));
+        specificGravity.setBackground(new Color(254, 0, 0, 255));
+        specificGravity.setForeground(Color.WHITE);
+
         crustalAbundance.addActionListener(this);
+        crustalAbundance.setFont(new Font("Consolas", Font.BOLD, 30));
+        crustalAbundance.setBackground(Color.BLACK);
+        crustalAbundance.setForeground(Color.WHITE);
+
         cleavage.addActionListener(this);
+        cleavage.setFont(new Font("Consolas", Font.BOLD, 30));
+        cleavage.setBackground(new Color(0, 128, 1, 255));
+        cleavage.setForeground(Color.WHITE);
+
         economicValue.addActionListener(this);
+        economicValue.setFont(new Font("Consolas", Font.BOLD, 30));
+        economicValue.setBackground(new Color(197, 165, 18, 255));
+        economicValue.setForeground(Color.WHITE);
+
         nextPlayerButton.addActionListener(this);
         finishButton.addActionListener(this);
     }
@@ -308,13 +329,22 @@ public class GUI extends JFrame implements ActionListener {
                     } else if (game.categoryIsSelected && validCard) {
                         game.playCard(selectedCard, i);
                         cardDetailsLabel.setText(game.playerSelection().toString());
-                        game.nextPlayer();
-                        panel2.removeAll();
-                        beginButton.setText("Next Player");
-                        panel2.add(beginButton);
-                        statusLabel.setText("Press 'Next Player' to begin the next players turn");
-                        validate();
-                        repaint();
+                        if (game.getLastCardPlayed().getCardType().equals("trump")){
+                            panel2.removeAll();
+                            beginButton.setText("Select Another Card");
+                            panel2.add(beginButton);
+                            statusLabel.setText("You played a trump card! It's your turn again!");
+                            validate();
+                            repaint();
+                        } else {
+                            game.nextPlayer();
+                            panel2.removeAll();
+                            beginButton.setText("Next Player");
+                            panel2.add(beginButton);
+                            statusLabel.setText("Press 'Next Player' to begin the next players turn");
+                            validate();
+                            repaint();
+                        }
                     }
                     if (!validCard) {
                         statusLabel.setText("You can't play that card, please select another");
@@ -345,7 +375,9 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == hardness) {
             game.cardCategory = "hardness";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
@@ -355,7 +387,9 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == specificGravity) {
             game.cardCategory = "specific gravity";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
@@ -365,7 +399,9 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == crustalAbundance) {
             game.cardCategory = "crustal abundance";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
@@ -375,7 +411,9 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == cleavage) {
             game.cardCategory = "cleavage";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
@@ -385,7 +423,9 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == economicValue) {
             game.cardCategory = "economic value";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
