@@ -14,7 +14,8 @@ public class GUI extends JFrame implements ActionListener {
     JPanel panel1 = new JPanel();
     JPanel topCardPanel = new JPanel();
     JLabel topCard = new JLabel("Top Card of the Deck");
-    JButton playedCard = new JButton();
+    Icon playedCardIcon;
+    JLabel playedCardLabel = new JLabel();
     JPanel cardDetailsPanel = new JPanel();
     JLabel cardDetailsLabel = new JLabel("Card Name, Category, Value");
     JPanel playerPanel = new JPanel();
@@ -36,8 +37,10 @@ public class GUI extends JFrame implements ActionListener {
     JTextField playersName5 = new JTextField("Player 5");
     JButton returnButton = new JButton("Return");
     JButton confirmPlayersNames = new JButton("Confirm Names");
-    JButton ruleCardButton;
+    Icon ruleCardIcon;
+    JLabel ruleCardLabel;
     JButton playerCardButton = new JButton("Player Card");
+    Icon playerCardIcon;
     JButton beginButton = new JButton("Begin");
     JButton finishButton = new JButton("End Game");
     JButton passButton = new JButton("Pass");
@@ -51,26 +54,35 @@ public class GUI extends JFrame implements ActionListener {
 
     //panel3
     JPanel panel3 = new JPanel();
-    JLabel statusLabel = new JLabel("Status/Errors");
+    JLabel statusLabel = new JLabel("Please make a selection");
 
     GUI() {
         super();
+
         panel1.setLayout(new GridLayout());
+        topCard.setForeground(new Color(163, 73, 164, 255));
+        topCard.setFont(new Font("Consolas", Font.BOLD, 15));
         topCardPanel.add(topCard);
         try {
             BufferedImage image = ImageIO.read(new File("images/Slide65.jpg"));
             Image image1 = image.getScaledInstance(111, 156, Image.SCALE_SMOOTH);
             Icon icon = new ImageIcon(image1);
-            playedCard = new JButton(icon);
+            playedCardLabel = new JLabel(icon);
 
         } catch (IOException e) {
             System.out.println("File not Found");
         }
-        topCardPanel.add(playedCard);
+        topCardPanel.add(playedCardLabel);
         panel1.add(topCardPanel);
+        cardDetailsLabel.setFont(new Font("Consolas", Font.BOLD, 15));
         cardDetailsPanel.add(cardDetailsLabel);
+        cardDetailsLabel.setForeground(new Color(163, 73, 164, 255));
         panel1.add(cardDetailsPanel);
+        playersTurn.setForeground(new Color(163, 73, 164, 255));
+        playersTurn.setFont(new Font("Consolas", Font.BOLD, 15));
         playerPanel.add(playersTurn);
+        nameLabel.setForeground(new Color(163, 73, 164, 255));
+        nameLabel.setFont(new Font("Consolas", Font.BOLD, 15));
         playerPanel.add(nameLabel);
         panel1.add(playerPanel);
 
@@ -79,23 +91,82 @@ public class GUI extends JFrame implements ActionListener {
         panel2.add(play);
         panel2.add(rules);
         panel2.add(quit);
+        playerCardButton.setForeground(new Color(163, 73, 164, 255));
+        playerCardButton.setFont(new Font("Consolas", Font.BOLD, 15));
 
+        statusLabel.setForeground(new Color(163, 73, 164, 255));
+        statusLabel.setFont(new Font("Consolas", Font.BOLD, 15));
         panel3.add(statusLabel);
 
         super.add(panel1, BorderLayout.NORTH);
         super.add(panel2);
         super.add(panel3, BorderLayout.SOUTH);
 
+        playersName1.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName1.setBackground(Color.WHITE);
+        playersName1.setForeground(new Color(163, 73, 164, 255));
+        playersName2.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName2.setBackground(Color.WHITE);
+        playersName2.setForeground(new Color(163, 73, 164, 255));
+        playersName3.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName3.setBackground(Color.WHITE);
+        playersName3.setForeground(new Color(163, 73, 164, 255));
+        playersName4.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName4.setBackground(Color.WHITE);
+        playersName4.setForeground(new Color(163, 73, 164, 255));
+        playersName5.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName5.setBackground(Color.WHITE);
+        playersName5.setForeground(new Color(163, 73, 164, 255));
+
         quit.addActionListener(this);
+        quit.setFont(new Font("Consolas", Font.BOLD, 30));
+        quit.setBackground(new Color(163, 73, 164, 255));
+        quit.setForeground(Color.WHITE);
+
         rules.addActionListener(this);
+        rules.setFont(new Font("Consolas", Font.BOLD, 30));
+        rules.setBackground(new Color(163, 73, 164, 255));
+        rules.setForeground(Color.WHITE);
+
         play.addActionListener(this);
+        play.setFont(new Font("Consolas", Font.BOLD, 30));
+        play.setBackground(new Color(163, 73, 164, 255));
+        play.setForeground(Color.WHITE);
+
         returnButton.addActionListener(this);
+        returnButton.setFont(new Font("Consolas", Font.BOLD, 30));
+        returnButton.setBackground(new Color(163, 73, 164, 255));
+        returnButton.setForeground(Color.WHITE);
+
         threePlayers.addActionListener(this);
+        threePlayers.setFont(new Font("Consolas", Font.BOLD, 30));
+        threePlayers.setBackground(new Color(163, 73, 164, 255));
+        threePlayers.setForeground(Color.WHITE);
+
         fourPlayers.addActionListener(this);
+        fourPlayers.setFont(new Font("Consolas", Font.BOLD, 30));
+        fourPlayers.setBackground(new Color(163, 73, 164, 255));
+        fourPlayers.setForeground(Color.WHITE);
+
         fivePlayers.addActionListener(this);
+        fivePlayers.setFont(new Font("Consolas", Font.BOLD, 30));
+        fivePlayers.setBackground(new Color(163, 73, 164, 255));
+        fivePlayers.setForeground(Color.WHITE);
+
         confirmPlayersNames.addActionListener(this);
+        confirmPlayersNames.setFont(new Font("Consolas", Font.BOLD, 30));
+        confirmPlayersNames.setBackground(new Color(163, 73, 164, 255));
+        confirmPlayersNames.setForeground(Color.WHITE);
+
         beginButton.addActionListener(this);
+        beginButton.setFont(new Font("Consolas", Font.BOLD, 30));
+        beginButton.setBackground(new Color(163, 73, 164, 255));
+        beginButton.setForeground(Color.WHITE);
+
         passButton.addActionListener(this);
+        passButton.setFont(new Font("Consolas", Font.BOLD, 30));
+        passButton.setBackground(new Color(163, 73, 164, 255));
+        passButton.setForeground(Color.WHITE);
 
         hardness.addActionListener(this);
         hardness.setFont(new Font("Consolas", Font.BOLD, 30));
@@ -124,6 +195,7 @@ public class GUI extends JFrame implements ActionListener {
 
         nextPlayerButton.addActionListener(this);
         finishButton.addActionListener(this);
+
     }
 
     public static void main(String[] args) {
@@ -136,13 +208,13 @@ public class GUI extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static JButton createCardButton(String filePath, int width, int height) {
+    public static Icon createCardIcon(String filePath, int width, int height) {
         try {
             BufferedImage image = ImageIO.read(new File(filePath));
             Image image1 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             Icon icon = new ImageIcon(image1);
-            JButton card = new JButton(icon);
-            return card;
+//            JButton card = new JButton(icon);
+            return icon;
         } catch (IOException e) {
             System.out.println("File not Found");
         }
@@ -157,8 +229,9 @@ public class GUI extends JFrame implements ActionListener {
         if (source == rules) {
             panel2.removeAll();
             for (Card ruleCard : game.ruleDeck.deck) {
-                ruleCardButton = createCardButton("images/" + ruleCard.getFileName(), 330, 465);
-                panel2.add(ruleCardButton);
+                ruleCardIcon = createCardIcon("images/" + ruleCard.getFileName(), 330, 465);
+                ruleCardLabel = new JLabel(ruleCardIcon);
+                panel2.add(ruleCardLabel);
 
             }
 
@@ -261,7 +334,8 @@ public class GUI extends JFrame implements ActionListener {
             } else if (!game.players.get(game.playersTurn).getPassed()) {
                 nameLabel.setText(game.players.get(game.playersTurn).getName());
                 for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
-                    playerCardButton = createCardButton("images/" + playersCard.getFileName(), 134, 189);
+                    playerCardIcon = createCardIcon("images/" + playersCard.getFileName(), 134, 189);
+                    playerCardButton = new JButton(playerCardIcon);
                     panel2.add(playerCardButton);
                     playerCardButton.setName(playersCard.getTitle());
                     playerCardButton.setActionCommand("cardSelected");
@@ -329,7 +403,7 @@ public class GUI extends JFrame implements ActionListener {
                     } else if (game.categoryIsSelected && validCard) {
                         game.playCard(selectedCard, i);
                         cardDetailsLabel.setText(game.playerSelection().toString());
-                        if (game.getLastCardPlayed().getCardType().equals("trump")){
+                        if (game.getLastCardPlayed().getCardType().equals("trump")) {
                             panel2.removeAll();
                             beginButton.setText("Select Another Card");
                             panel2.add(beginButton);
@@ -350,9 +424,10 @@ public class GUI extends JFrame implements ActionListener {
                         statusLabel.setText("You can't play that card, please select another");
                         repaint();
                     } else {
-                        topCardPanel.remove(playedCard);
-                        playedCard = createCardButton("images/" + selectedCard.getFileName(), 111, 156);
-                        topCardPanel.add(playedCard);
+                        topCardPanel.remove(playedCardLabel);
+                        playedCardIcon = createCardIcon("images/" + selectedCard.getFileName(), 111, 156);
+                        playedCardLabel = new JLabel(playedCardIcon);
+                        topCardPanel.add(playedCardLabel);
                         statusLabel.setText("Card played!");
                         validate();
                         repaint();
@@ -364,7 +439,7 @@ public class GUI extends JFrame implements ActionListener {
                         game.winningPlayer();
 
                     }
-                    if (game.players.size() < 2){
+                    if (game.players.size() < 2) {
                         panel2.removeAll();
                         panel2.add(finishButton);
 
@@ -432,7 +507,7 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == finishButton){
+        } else if (source == finishButton) {
             panel2.removeAll();
             JLabel winnersLabel = new JLabel();
             winnersLabel.setText(game.displayWinners().toString());
