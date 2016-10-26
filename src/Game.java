@@ -454,7 +454,7 @@ public class Game {
     //each time a card is checked, it is based on the category that is currently selected
     public boolean checkCard(Card selectedCard) {
         Card lastCardPlayed;
-        if (playedDeck.deckSize == 0 || newCategorySelected) {
+        if (playedDeck.deckSize == 0 || newCategorySelected || !categoryIsSelected) {
             return true;
         } else {
             lastCardPlayed = getLastCardPlayed();

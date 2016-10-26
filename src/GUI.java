@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class GUI extends JFrame implements ActionListener {
     static Game game = new Game();
-    //panel1
+    //panel1 components
     JPanel panel1 = new JPanel();
     JPanel topCardPanel = new JPanel();
     JLabel topCard = new JLabel("Top Card of the Deck");
@@ -22,7 +22,7 @@ public class GUI extends JFrame implements ActionListener {
     JLabel playersTurn = new JLabel("Players Turn:");
     JLabel nameLabel = new JLabel("Players Name");
 
-    //panel2
+    //panel2 components
     JPanel panel2 = new JPanel();
     JButton play = new JButton("Play");
     JButton rules = new JButton("Rules");
@@ -51,16 +51,17 @@ public class GUI extends JFrame implements ActionListener {
     JButton economicValue = new JButton("Economic Value");
     JButton nextPlayerButton = new JButton("Next Player");
     int numberPlayers = 0;
+    Color purple = new Color(163, 73, 164, 255);
 
-    //panel3
+    //panel3 components
     JPanel panel3 = new JPanel();
     JLabel statusLabel = new JLabel("Please make a selection");
 
     GUI() {
         super();
-
+        //panel1 initial setup including coloring and font styles
         panel1.setLayout(new GridLayout());
-        topCard.setForeground(new Color(163, 73, 164, 255));
+        topCard.setForeground(purple);
         topCard.setFont(new Font("Consolas", Font.BOLD, 15));
         topCardPanel.add(topCard);
         try {
@@ -76,96 +77,88 @@ public class GUI extends JFrame implements ActionListener {
         panel1.add(topCardPanel);
         cardDetailsLabel.setFont(new Font("Consolas", Font.BOLD, 15));
         cardDetailsPanel.add(cardDetailsLabel);
-        cardDetailsLabel.setForeground(new Color(163, 73, 164, 255));
+        cardDetailsLabel.setForeground(purple);
         panel1.add(cardDetailsPanel);
-        playersTurn.setForeground(new Color(163, 73, 164, 255));
+        playersTurn.setForeground(purple);
         playersTurn.setFont(new Font("Consolas", Font.BOLD, 15));
         playerPanel.add(playersTurn);
-        nameLabel.setForeground(new Color(163, 73, 164, 255));
+        nameLabel.setForeground(purple);
         nameLabel.setFont(new Font("Consolas", Font.BOLD, 15));
         playerPanel.add(nameLabel);
         panel1.add(playerPanel);
 
-
+        //panel2 components including all coloring, font styles and action listeners
         panel2.setLayout(new GridLayout(2, 8));
         panel2.add(play);
         panel2.add(rules);
         panel2.add(quit);
-        playerCardButton.setForeground(new Color(163, 73, 164, 255));
+        playerCardButton.setForeground(purple);
         playerCardButton.setFont(new Font("Consolas", Font.BOLD, 15));
-
-        statusLabel.setForeground(new Color(163, 73, 164, 255));
-        statusLabel.setFont(new Font("Consolas", Font.BOLD, 15));
-        panel3.add(statusLabel);
-
-        super.add(panel1, BorderLayout.NORTH);
-        super.add(panel2);
-        super.add(panel3, BorderLayout.SOUTH);
-
-        playersName1.setFont(new Font("Consolas", Font.BOLD, 30));
-        playersName1.setBackground(Color.WHITE);
-        playersName1.setForeground(new Color(163, 73, 164, 255));
-        playersName2.setFont(new Font("Consolas", Font.BOLD, 30));
-        playersName2.setBackground(Color.WHITE);
-        playersName2.setForeground(new Color(163, 73, 164, 255));
-        playersName3.setFont(new Font("Consolas", Font.BOLD, 30));
-        playersName3.setBackground(Color.WHITE);
-        playersName3.setForeground(new Color(163, 73, 164, 255));
-        playersName4.setFont(new Font("Consolas", Font.BOLD, 30));
-        playersName4.setBackground(Color.WHITE);
-        playersName4.setForeground(new Color(163, 73, 164, 255));
-        playersName5.setFont(new Font("Consolas", Font.BOLD, 30));
-        playersName5.setBackground(Color.WHITE);
-        playersName5.setForeground(new Color(163, 73, 164, 255));
 
         quit.addActionListener(this);
         quit.setFont(new Font("Consolas", Font.BOLD, 30));
-        quit.setBackground(new Color(163, 73, 164, 255));
+        quit.setBackground(purple);
         quit.setForeground(Color.WHITE);
 
         rules.addActionListener(this);
         rules.setFont(new Font("Consolas", Font.BOLD, 30));
-        rules.setBackground(new Color(163, 73, 164, 255));
+        rules.setBackground(purple);
         rules.setForeground(Color.WHITE);
 
         play.addActionListener(this);
         play.setFont(new Font("Consolas", Font.BOLD, 30));
-        play.setBackground(new Color(163, 73, 164, 255));
+        play.setBackground(purple);
         play.setForeground(Color.WHITE);
 
         returnButton.addActionListener(this);
         returnButton.setFont(new Font("Consolas", Font.BOLD, 30));
-        returnButton.setBackground(new Color(163, 73, 164, 255));
+        returnButton.setBackground(purple);
         returnButton.setForeground(Color.WHITE);
+
+        playersName1.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName1.setBackground(Color.WHITE);
+        playersName1.setForeground(purple);
+        playersName2.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName2.setBackground(Color.WHITE);
+        playersName2.setForeground(purple);
+        playersName3.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName3.setBackground(Color.WHITE);
+        playersName3.setForeground(purple);
+        playersName4.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName4.setBackground(Color.WHITE);
+        playersName4.setForeground(purple);
+        playersName5.setFont(new Font("Consolas", Font.BOLD, 30));
+        playersName5.setBackground(Color.WHITE);
+        playersName5.setForeground(purple);
 
         threePlayers.addActionListener(this);
         threePlayers.setFont(new Font("Consolas", Font.BOLD, 30));
-        threePlayers.setBackground(new Color(163, 73, 164, 255));
+        threePlayers.setBackground(purple);
         threePlayers.setForeground(Color.WHITE);
 
         fourPlayers.addActionListener(this);
         fourPlayers.setFont(new Font("Consolas", Font.BOLD, 30));
-        fourPlayers.setBackground(new Color(163, 73, 164, 255));
+        fourPlayers.setBackground(purple);
         fourPlayers.setForeground(Color.WHITE);
 
         fivePlayers.addActionListener(this);
         fivePlayers.setFont(new Font("Consolas", Font.BOLD, 30));
-        fivePlayers.setBackground(new Color(163, 73, 164, 255));
+        fivePlayers.setBackground(purple);
         fivePlayers.setForeground(Color.WHITE);
 
         confirmPlayersNames.addActionListener(this);
         confirmPlayersNames.setFont(new Font("Consolas", Font.BOLD, 30));
-        confirmPlayersNames.setBackground(new Color(163, 73, 164, 255));
+        confirmPlayersNames.setBackground(purple);
         confirmPlayersNames.setForeground(Color.WHITE);
 
         beginButton.addActionListener(this);
         beginButton.setFont(new Font("Consolas", Font.BOLD, 30));
-        beginButton.setBackground(new Color(163, 73, 164, 255));
+        beginButton.setBackground(purple);
         beginButton.setForeground(Color.WHITE);
 
         passButton.addActionListener(this);
         passButton.setFont(new Font("Consolas", Font.BOLD, 30));
-        passButton.setBackground(new Color(163, 73, 164, 255));
+        passButton.setBackground(purple);
         passButton.setForeground(Color.WHITE);
 
         hardness.addActionListener(this);
@@ -196,6 +189,15 @@ public class GUI extends JFrame implements ActionListener {
         nextPlayerButton.addActionListener(this);
         finishButton.addActionListener(this);
 
+        //panel3 initial setup
+        statusLabel.setForeground(purple);
+        statusLabel.setFont(new Font("Consolas", Font.BOLD, 15));
+        panel3.add(statusLabel);
+
+        //frame setup
+        super.add(panel1, BorderLayout.NORTH);
+        super.add(panel2);
+        super.add(panel3, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {
@@ -225,22 +227,22 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
 
-
+        //when 'rules' button is clicked, rule cards and return button is displayed
         if (source == rules) {
             panel2.removeAll();
             for (Card ruleCard : game.ruleDeck.deck) {
                 ruleCardIcon = createCardIcon("images/" + ruleCard.getFileName(), 330, 465);
                 ruleCardLabel = new JLabel(ruleCardIcon);
                 panel2.add(ruleCardLabel);
-
             }
-
             panel2.add(returnButton);
             panel2.setLayout(new GridLayout(1, 4));
             statusLabel.setText("Please press the return button to return to the main menu");
             validate();
             repaint();
-        } else if (source == returnButton) {
+        }
+        //return button returns to main menu and displays play, rules and quit buttons
+        else if (source == returnButton) {
             panel2.removeAll();
             panel2.add(play);
             panel2.add(rules);
@@ -249,9 +251,13 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Please make a selection");
             validate();
             repaint();
-        } else if (source == quit) {
+        }
+        //quits the game
+        else if (source == quit) {
             System.exit(0);
-        } else if (source == confirmPlayersNames) {
+        }
+        //confirms the players names and created instances of Player using the name
+        else if (source == confirmPlayersNames) {
             if (numberPlayers == 3) {
                 game.createPlayers(playersName1.getText());
                 game.createPlayers(playersName2.getText());
@@ -275,8 +281,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("All Cards have been shuffled and dealt. Please press button to begin");
             validate();
             repaint();
-
-        } else if (source == threePlayers) {
+        }
+        //adds text boxes to get 3 players names
+        else if (source == threePlayers) {
             numberPlayers = 3;
             panel2.removeAll();
             panel2.add(playersName1);
@@ -286,7 +293,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
-        } else if (source == fourPlayers) {
+        }
+        //adds text boxes to get 4 players names
+        else if (source == fourPlayers) {
             numberPlayers = 4;
             panel2.removeAll();
             panel2.add(playersName1);
@@ -297,7 +306,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
-        } else if (source == fivePlayers) {
+        }
+        //adds text boxes to get 5 players names
+        else if (source == fivePlayers) {
             numberPlayers = 5;
             panel2.removeAll();
             panel2.add(playersName1);
@@ -309,7 +320,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Please enter the names of the players and press confirm");
             validate();
             repaint();
-        } else if (source == play) {
+        }
+        //adds buttons to get how many players there will be
+        else if (source == play) {
             panel2.removeAll();
             panel2.add(threePlayers);
             panel2.add(fourPlayers);
@@ -317,11 +330,13 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Please select the number of players");
             validate();
             repaint();
-        } else if (source == beginButton) {
+        }
+        //checks it the player is valid and not passed then gets all the cards in the players hand and displays them
+        //if the player is leading out new round pass button is not displayed
+        else if (source == beginButton) {
             panel2.removeAll();
             game.validPlayer();
             if (game.players.get(game.playersTurn).getPassed()) {
-
                 statusLabel.setText("You've passed. Please press next player");
                 game.nextPlayer();
                 panel2.removeAll();
@@ -329,8 +344,6 @@ public class GUI extends JFrame implements ActionListener {
                 panel2.add(beginButton);
                 validate();
                 repaint();
-
-
             } else if (!game.players.get(game.playersTurn).getPassed()) {
                 nameLabel.setText(game.players.get(game.playersTurn).getName());
                 for (Card playersCard : game.players.get(game.playersTurn).getPlayersHand()) {
@@ -340,6 +353,7 @@ public class GUI extends JFrame implements ActionListener {
                     playerCardButton.setName(playersCard.getTitle());
                     playerCardButton.setActionCommand("cardSelected");
                     playerCardButton.addActionListener(this);
+                    playerCardButton.setBackground(purple);
 
                 }
                 if (!game.playersPassed()) {
@@ -355,7 +369,9 @@ public class GUI extends JFrame implements ActionListener {
                 repaint();
 
             }
-        } else if (source == passButton) {
+        }
+        //when pass button is pressed a card is drawn for them and next player button is displayed
+        else if (source == passButton) {
             statusLabel.setText("You chose to pass and drew a card");
             game.drawCard();
             if (game.playersPassed()) {
@@ -368,13 +384,18 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (event.getActionCommand().equals("cardSelected")) {
+        }
+        //when a card is selected, if it's invalid they will be prompted to select again otherwise the card is played
+        //If there is not currently a category selected or The Geologist trump card is played, it asks for a new category to be selected
+        //If a trump card is played, the new category is automatically selected
+        //If a trump card is played or the special round winning condition is met, player selects another card
+        //Otherwise the next player button is displayed
+        //A validly played card is removed from the players hand and put on the top of the deck
+        else if (event.getActionCommand().equals("cardSelected")) {
             for (int i = 0; i < game.players.get(game.playersTurn).getPlayersHand().size(); ++i) {
-                System.out.println(((JComponent) event.getSource()).getName());
                 if (game.players.get(game.playersTurn).getPlayersHand().get(i).getTitle().equals(((JComponent) event.getSource()).getName())) {
                     Card selectedCard = game.players.get(game.playersTurn).getPlayersHand().get(i);
                     boolean validCard = game.checkCard(selectedCard);
-                    System.out.println(validCard);
                     if (selectedCard.getCardType().equals("trump")) {
                         if (selectedCard.getTitle().equals("The Geologist")) {
                             game.categoryIsSelected = false;
@@ -432,22 +453,21 @@ public class GUI extends JFrame implements ActionListener {
                         validate();
                         repaint();
                         game.newCategorySelected = false;
-
                     }
                     game.newCategorySelected = false;
                     if (game.players.get(game.playersTurn).getHandSize() == 0) {
                         game.winningPlayer();
-
                     }
                     if (game.players.size() < 2) {
                         panel2.removeAll();
                         panel2.add(finishButton);
-
                     }
+                    break;
                 }
             }
-
-        } else if (source == hardness) {
+        }
+        //When the hardness button is clicked, hardness is set as the category and the next player button is displayed
+        else if (source == hardness) {
             game.cardCategory = "hardness";
             cardDetailsLabel.setText(game.playerSelection().toString());
             if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
@@ -459,7 +479,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == specificGravity) {
+        }
+        //When the specific gravity button is clicked, specific gravity is set as the category and the next player button is displayed
+        else if (source == specificGravity) {
             game.cardCategory = "specific gravity";
             cardDetailsLabel.setText(game.playerSelection().toString());
             if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
@@ -471,7 +493,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == crustalAbundance) {
+        }
+        //When the crustal abundance button is clicked, crustal abundance is set as the category and the next player button is displayed
+        else if (source == crustalAbundance) {
             game.cardCategory = "crustal abundance";
             cardDetailsLabel.setText(game.playerSelection().toString());
             if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
@@ -483,7 +507,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == cleavage) {
+        }
+        //When the cleavage button is clicked, cleavage is set as the category and the next player button is displayed
+        else if (source == cleavage) {
             game.cardCategory = "cleavage";
             cardDetailsLabel.setText(game.playerSelection().toString());
             if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
@@ -495,7 +521,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == economicValue) {
+        }
+        //When the economic value button is clicked, economic value is set as the category and the next player button is displayed
+        else if (source == economicValue) {
             game.cardCategory = "economic value";
             cardDetailsLabel.setText(game.playerSelection().toString());
             if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
@@ -507,7 +535,9 @@ public class GUI extends JFrame implements ActionListener {
             statusLabel.setText("Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
-        } else if (source == finishButton) {
+        }
+        //When finish button is clicked, the winners and losers are displayed
+        else if (source == finishButton) {
             panel2.removeAll();
             JLabel winnersLabel = new JLabel();
             winnersLabel.setText(game.displayWinners().toString());
