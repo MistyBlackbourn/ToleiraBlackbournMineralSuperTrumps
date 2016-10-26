@@ -342,7 +342,9 @@ public class GUI extends JFrame implements ActionListener {
                     playerCardButton.addActionListener(this);
 
                 }
-                panel2.add(passButton);
+                if (!game.playersPassed()) {
+                    panel2.add(passButton);
+                }
                 if (!game.categoryIsSelected) {
                     statusLabel.setText("Please select any card, you will then also need to select a category");
                 } else {
@@ -353,8 +355,6 @@ public class GUI extends JFrame implements ActionListener {
                 repaint();
 
             }
-
-
         } else if (source == passButton) {
             statusLabel.setText("You chose to pass and drew a card");
             game.drawCard();
@@ -403,7 +403,7 @@ public class GUI extends JFrame implements ActionListener {
                     } else if (game.categoryIsSelected && validCard) {
                         game.playCard(selectedCard, i);
                         cardDetailsLabel.setText(game.playerSelection().toString());
-                        if (game.getLastCardPlayed().getCardType().equals("trump")) {
+                        if (game.getLastCardPlayed().getCardType().equals("trump") || game.specialRoundWinningCondition()) {
                             panel2.removeAll();
                             beginButton.setText("Select Another Card");
                             panel2.add(beginButton);
@@ -450,7 +450,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == hardness) {
             game.cardCategory = "hardness";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
                 game.nextPlayer();
             }
             panel2.removeAll();
@@ -462,7 +462,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == specificGravity) {
             game.cardCategory = "specific gravity";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
                 game.nextPlayer();
             }
             panel2.removeAll();
@@ -474,7 +474,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == crustalAbundance) {
             game.cardCategory = "crustal abundance";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
                 game.nextPlayer();
             }
             panel2.removeAll();
@@ -486,7 +486,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == cleavage) {
             game.cardCategory = "cleavage";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
                 game.nextPlayer();
             }
             panel2.removeAll();
@@ -498,7 +498,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (source == economicValue) {
             game.cardCategory = "economic value";
             cardDetailsLabel.setText(game.playerSelection().toString());
-            if (!game.getLastCardPlayed().getCardType().equals("trump")) {
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
                 game.nextPlayer();
             }
             panel2.removeAll();

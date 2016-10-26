@@ -437,6 +437,7 @@ public class Game {
         return economicValueValue;
     }
 
+    //checks and return true or false whether the special round winning condition of The Geophysicist card being played with magnetite card
     public boolean specialRoundWinningCondition() {
         try {
             Card lastCardPlayed = getLastCardPlayed();
