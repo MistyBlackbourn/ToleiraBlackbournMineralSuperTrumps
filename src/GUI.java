@@ -188,6 +188,10 @@ public class GUI extends JFrame implements ActionListener {
 
         nextPlayerButton.addActionListener(this);
         finishButton.addActionListener(this);
+        finishButton.setFont(new Font("Consolas", Font.BOLD, 30));
+        finishButton.setBackground(purple);
+        finishButton.setForeground(Color.WHITE);
+
 
         //panel3 initial setup
         statusLabel.setForeground(purple);
@@ -338,7 +342,9 @@ public class GUI extends JFrame implements ActionListener {
             game.validPlayer();
             if (game.players.get(game.playersTurn).getPassed()) {
                 statusLabel.setText("You've passed. Please press next player");
-                game.nextPlayer();
+                if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
+                    game.nextPlayer();
+                }
                 panel2.removeAll();
                 beginButton.setText("Next Player");
                 panel2.add(beginButton);
@@ -372,16 +378,17 @@ public class GUI extends JFrame implements ActionListener {
         }
         //when pass button is pressed a card is drawn for them and next player button is displayed
         else if (source == passButton) {
-            statusLabel.setText("You chose to pass and drew a card");
             game.drawCard();
             if (game.playersPassed()) {
                 game.categoryIsSelected = false;
             }
-            game.nextPlayer();
+            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
+                game.nextPlayer();
+            }
             panel2.removeAll();
             beginButton.setText("Next Player");
             panel2.add(beginButton);
-            statusLabel.setText("Press 'Next Player' to begin the next players turn");
+            statusLabel.setText("You chose to pass and drew a card. Press 'Next Player' to begin the next players turn");
             validate();
             repaint();
         }
@@ -421,8 +428,14 @@ public class GUI extends JFrame implements ActionListener {
                         game.categoryIsSelected = true;
                         game.newCategorySelected = true;
                         game.resetPlayersPassed();
+                        if (game.players.get(game.playersTurn).getPlayersHand().size() == 0) {
+                            game.winningPlayer();
+                        }
                     } else if (game.categoryIsSelected && validCard) {
                         game.playCard(selectedCard, i);
+                        if (game.players.get(game.playersTurn).getPlayersHand().size() == 0) {
+                            game.winningPlayer();
+                        }
                         cardDetailsLabel.setText(game.playerSelection().toString());
                         if (game.getLastCardPlayed().getCardType().equals("trump") || game.specialRoundWinningCondition()) {
                             panel2.removeAll();
@@ -432,7 +445,9 @@ public class GUI extends JFrame implements ActionListener {
                             validate();
                             repaint();
                         } else {
-                            game.nextPlayer();
+                            if (!game.getLastCardPlayed().getCardType().equals("trump") || !game.specialRoundWinningCondition()) {
+                                game.nextPlayer();
+                            }
                             panel2.removeAll();
                             beginButton.setText("Next Player");
                             panel2.add(beginButton);
@@ -455,9 +470,7 @@ public class GUI extends JFrame implements ActionListener {
                         game.newCategorySelected = false;
                     }
                     game.newCategorySelected = false;
-                    if (game.players.get(game.playersTurn).getHandSize() == 0) {
-                        game.winningPlayer();
-                    }
+
                     if (game.players.size() < 2) {
                         panel2.removeAll();
                         panel2.add(finishButton);
@@ -540,9 +553,12 @@ public class GUI extends JFrame implements ActionListener {
         else if (source == finishButton) {
             panel2.removeAll();
             JLabel winnersLabel = new JLabel();
+            winnersLabel.setForeground(purple);
+            winnersLabel.setFont(new Font("Consolas", Font.BOLD, 20));
             winnersLabel.setText(game.displayWinners().toString());
             panel2.add(winnersLabel);
             panel2.add(returnButton);
+            statusLabel.setText("And the winners are.... Please click the return button to return to the main menu");
             validate();
             repaint();
         }
